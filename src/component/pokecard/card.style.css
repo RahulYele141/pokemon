@@ -1,0 +1,30 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    height: 270px;
+    border: 2px dashed black;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(#CFB7ED, #C0D4C8);
+    border-radius: 10px;
+}
+
+.card .cardImage {
+    flex: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .cardItems {
+    flex: 70px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image {
+    height: 85%;
+    width: 85%;
+}
