@@ -1,11 +1,12 @@
+import API from "./component/constants/api";
 import Home from "./component/home/home.component";
 
 function App() {
   return (
     <div>
-      <Home />
+      <API />
     </div>
-  )
+  );
 }
 
 export default App;

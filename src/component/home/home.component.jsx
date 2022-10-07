@@ -7,22 +7,8 @@ const Home = () => {
   const [pokemonInfo, setPokemonInfo] = useState([]);
 
   useEffect(() => {
-    fetch(`${API_URL}?limit=10`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        const pokemon = response.results.map((url) => {
-          fetch(`${url.url}`)
-            .then((response) => response.json())
-            .then((response) => {
-              console.log(response);
-            });
-        });
-      });
+    console.log();
   }, []);
-
-  console.log("here", pokemonInfo);
 
   return (
     <div>
