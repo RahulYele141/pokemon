@@ -1,25 +1,32 @@
+import { getDefaultNormalizer } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
+import { fetchPokemonData } from "../constants/api";
 import Card from "../pokecard/card.component";
 import './home.style.css'
 
-const API_URL = "https://pokeapi.co/api/v2/pokemon";
-
 const Home = () => {
-    const [pokemons, setPokemon] = useState([])
+    const [pokemons, setPokemons] = useState([])
     useEffect(() => {
-        fetch(`${API_URL}?limit=18`)
-            .then((response) => response.json())
-            .then((response) => {
-                const promises = response.results.map(url => {
-                    return fetch(`${url.url}`).then(response => response.json());
-                });
-                Promise.all(promises).then(result => {
-                    setPokemon(result)
-                })
-            });
-    }, []);
 
-    console.log(pokemons);
+        async function getData() {
+            const response = await fetchPokemonData()
+            console.log(response);
+            setPokemons(response)
+        }
+        getData()
+
+        /*  fetch(`${API_URL}?limit=18`)
+              .then((response) => response.json())
+              .then((response) => {
+                  const promises = response.results.map(url => {
+                      return fetch(`${url.url}`).then(response => response.json());
+                  });
+                  Promise.all(promises).then(result => {
+                      setPokemons(result)
+                  })
+              });*/
+
+    }, []);
 
     return (
         <div className="home">{pokemons.map((pokemon, key) => {
