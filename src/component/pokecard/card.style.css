@@ -6,7 +6,7 @@
     border: 2px dashed black;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(#CFB7ED, #C0D4C8);
+    /* background-image: linear-gradient(#CFB7ED, #C0D4C8); */
     border-radius: 10px;
 }
 

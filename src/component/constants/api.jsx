@@ -1,15 +1,26 @@
-const API_URL = "https://pokeapi.co/api/v2/pokemon";
+const API_POKEMON = 'https://pokeapi.co/api/v2/pokemon';
+const API_TYPES = 'https://pokeapi.co/api/v2/type'
 
 export const fetchPokemonData = async () => {
-    const data = await fetch(`${API_URL}?limit=18`).then((response) => response.json());
-    const json = await data;
+    const response = await fetch(`${API_POKEMON}?limit=04`).then((response) => response.json());
+    const json = await response.results;
 
-    const promises = await json.results.map(url => {
+    const promises = await json.map(url => {
         return fetch(`${url.url}`).then(response => response.json());
     });
 
-    const data1 = await Promise.all(promises).then(result => {
+    const allPokemons = await Promise.all(promises).then(result => {
         return result
     })
-    return data1
+    return allPokemons
+}
+
+
+export const fetchPokemonTypes = async () => {
+    const response = await fetch(`${API_TYPES}`).then(response => response.json())
+    const json = await response.results
+    const types = json.map((type) => {
+        return type.name
+    })
+    return types
 }
