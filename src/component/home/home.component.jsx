@@ -22,36 +22,35 @@ const Home = () => {
     <div className="home">
       {pokemons.map((pokemon, key) => {
         const pokemonKindList = pokemon.types.slice(0, 2);
-        //   console.log(pokemonKindList);
-
-        // const pokemonType = types.find((type) => {
-        //   const isTypeExist = type.hasOwnProperty(pokemonKind);
-        //   return isTypeExist;
-        // });
 
         const pokemonKindName1 = pokemonKindList[0]?.type?.name;
         const pokemonKindName2 = pokemonKindList[1]?.type?.name;
-        // console.log(pokemonKindName1, pokemonKindName2);
 
         const pokemonTypes = types.filter((type) => {
           const isTypeExist =
             type.hasOwnProperty(pokemonKindName1) ||
             type.hasOwnProperty(pokemonKindName2);
-          console.log(isTypeExist);
-
           return isTypeExist;
         });
 
-        console.log(pokemonTypes);
+        // console.log(pokemonTypes);
 
-        const color1 = pokemonTypes[0][pokemonKindName1]
+        const color1 = pokemonTypes[0]?.[pokemonKindName1]
           ? pokemonTypes[0][pokemonKindName1]
           : "#DDCBD0";
 
         const color2 = pokemonTypes[1]?.[pokemonKindName2]
-          ? pokemonTypes[1][pokemonKindName1]
+          ? pokemonTypes[1][pokemonKindName2]
           : color1;
-        console.log(color1, color2);
+
+        console.log(
+          pokemonTypes,
+          "color1",
+          pokemonTypes[0]?.[pokemonKindName1],
+          "color2",
+          pokemonTypes[1]?.[pokemonKindName2]
+        );
+        console.log(color1, "&&", color2);
 
         return (
           <div className="cards" key={key}>

@@ -25,7 +25,7 @@ const colors = [
 ];
 
 export const fetchPokemonData = async () => {
-  const response = await fetch(`${API_POKEMON}?limit=18`).then((response) =>
+  const response = await fetch(`${API_POKEMON}?limit=05`).then((response) =>
     response.json()
   );
   const json = await response.results;

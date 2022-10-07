@@ -3,7 +3,7 @@ import React from "react";
 import "./card.style.css";
 
 const Card = ({ img, pokemon, index, color1, color2 }) => {
-  console.log(color1, color2);
+  //   console.log(color1, color2);
   return (
     <div
       className="card"
