@@ -3,7 +3,9 @@ import React from "react";
 import "./card.style.css";
 
 const Card = ({ img, pokemon, index, color1, color2 }) => {
-  //   console.log(color1, color2);
+  function capitalize(s) {
+    return s[0].toUpperCase() + s.slice(1);
+  }
   return (
     <div
       className="card"
@@ -13,7 +15,7 @@ const Card = ({ img, pokemon, index, color1, color2 }) => {
         <img src={`${img}`} alt={"pokemon"} className="image" />
       </div>
       <div className="cardItems">
-        <h4>{pokemon}</h4>
+        <h3>{capitalize(pokemon)}</h3>
         <p>{("00" + (index + 1)).slice(-3)}</p>
       </div>
     </div>

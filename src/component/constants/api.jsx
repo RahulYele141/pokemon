@@ -1,5 +1,6 @@
 const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
 const API_TYPES = "https://pokeapi.co/api/v2/type";
+const API_STATS = 'https://pokeapi.co/api/v2/stat';
 
 const colors = [
   "#DDCBD0",
@@ -25,7 +26,7 @@ const colors = [
 ];
 
 export const fetchPokemonData = async () => {
-  const response = await fetch(`${API_POKEMON}?limit=18`).then((response) =>
+  const response = await fetch(`${API_POKEMON}?limit=150`).then((response) =>
     response.json()
   );
   const json = await response.results;
@@ -41,11 +42,9 @@ export const fetchPokemonData = async () => {
 };
 
 export const fetchPokemonTypes = async () => {
-  const response = await fetch(`${API_TYPES}`).then((response) =>
-    response.json()
-  );
+  const response = await fetch(`${API_TYPES}`).then((response) => response.json());
   const json = await response.results;
-  const types = json.map((type, ind) => {
+  const types = json.map((type) => {
     const name = type.name;
     return name;
   });
@@ -54,5 +53,16 @@ export const fetchPokemonTypes = async () => {
     abc[`${type}`] = colors[ind];
     return abc;
   });
-  return values;
+  return { values, types };
 };
+
+export const fetchPokemonStats = async () => {
+  const response = await fetch(`${API_STATS}`).then((response) => response.json());
+  const json = await response.results;
+  const stats = json.map((type) => {
+    const name = type.name;
+    return name;
+  });
+
+  return stats
+}

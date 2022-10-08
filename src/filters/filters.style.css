@@ -1,0 +1,52 @@
+.filters {
+    padding: 5px;
+    margin: 10px 40px 10px 45px;
+    display: flex;
+    flex-direction: row;
+}
+
+.search {
+    background-color: #C9DDE2;
+    padding: 18px;
+    margin: 18px;
+    flex-direction: row;
+    flex: 572px;
+    border: none;
+    border-radius: 10px;
+}
+
+.type {
+    background-color: #C9DDE2;
+    color: #2E3156;
+    font-weight: bold;
+    padding: 18px;
+    margin: 18px;
+    flex-direction: row;
+    flex: 180px;
+    border: none;
+    border-radius: 10px;
+}
+
+.gender {
+    background-color: #C9DDE2;
+    color: #2E3156;
+    font-weight: bold;
+    padding: 18px;
+    margin: 18px;
+    flex-direction: row;
+    flex: 180px;
+    border: none;
+    border-radius: 10px;
+}
+
+.stats {
+    background-color: #C9DDE2;
+    color: #2E3156;
+    font-weight: bold;
+    padding: 18px;
+    margin: 18px;
+    flex-direction: row;
+    flex: 180px;
+    border: none;
+    border-radius: 10px;
+}
