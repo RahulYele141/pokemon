@@ -8,8 +8,17 @@ const capitalize = (s) => {
   return s[0].toUpperCase() + s.slice(1);
 };
 
-const StatsModal = ({ records, onHandleChange, handleClose, open }) => {
-  const [val, setVal] = useState([60, 150]);
+const StatsModal = ({ records, handleClose, open, filterByStats }) => {
+  const [value, setValue] = useState([60, 150]);
+  const newRecords = records.map((record) => {
+    let abc = {};
+    abc[`${record}`] = value;
+    return abc;
+  });
+
+  newRecords.map((r) => {
+    Object.entries(r).map((rd) => {});
+  });
 
   const updateVal = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -17,12 +26,11 @@ const StatsModal = ({ records, onHandleChange, handleClose, open }) => {
     }
 
     if (activeThumb === 0) {
-      setVal([Math.min(newValue[0], val[1] - minDistance), val[1]]);
+      setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
     } else {
-      setVal([val[0], Math.max(newValue[1], val[0] + minDistance)]);
+      setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
     }
-
-    console.log(val);
+    // console.log("event", event.target.value, value);
   };
 
   return (
@@ -51,7 +59,7 @@ const StatsModal = ({ records, onHandleChange, handleClose, open }) => {
                       width: "360px",
                     }}
                     valueLabelDisplay="auto"
-                    value={val}
+                    value={value}
                     onChange={updateVal}
                     disableSwap
                     max={210}
@@ -63,7 +71,9 @@ const StatsModal = ({ records, onHandleChange, handleClose, open }) => {
         })}
         <div className="buttons">
           <button className="reset">Reset</button>
-          <button className="apply">Apply</button>
+          <button className="apply" onClick={filterByStats}>
+            Apply
+          </button>
         </div>
       </Box>
     </Modal>

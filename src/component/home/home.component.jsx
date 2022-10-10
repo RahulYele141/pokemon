@@ -65,7 +65,7 @@ const Home = () => {
     setSearchField();
   };
 
-  console.log(pokemons);
+  const filterByStats = (event) => {};
 
   return (
     <div>
@@ -75,6 +75,8 @@ const Home = () => {
       <div>
         <Filters
           filterByType={filterByType}
+          filterByStats={filterByStats}
+          // value={value}
           types={pokemonTypes}
           stats={stats}
           searchPokemon={serachPokemon}

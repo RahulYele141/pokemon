@@ -3,28 +3,21 @@ import Dropdown from "../dropdown/dropdown.component";
 import StatsModal from "../slider/slider.component";
 import "./filters.style.css";
 
-const Filters = ({ searchPokemon, types, stats, filterByType }) => {
+const Filters = ({
+  searchPokemon,
+  types,
+  stats,
+  filterByType,
+  filterByStats,
+  value,
+}) => {
   const [open, setOpen] = useState(false);
   const [slider, setSlider] = useState(false);
 
-  const handleOpen = () => {
-    return setOpen(!open);
-  };
-  const handleClose = () => {
-    return setOpen(false);
-  };
-
-  const openSlider = () => {
-    return setSlider(!slider);
-  };
-
-  const closeSlider = () => {
-    return setSlider(false);
-  };
-
-  const capitalize = (s) => {
-    return s[0].toUpperCase() + s.slice(1);
-  };
+  const handleOpen = () => setOpen(!open);
+  const handleClose = () => setOpen(false);
+  const openSlider = () => setSlider(!slider);
+  const closeSlider = () => setSlider(false);
 
   return (
     <div>
@@ -68,13 +61,16 @@ const Filters = ({ searchPokemon, types, stats, filterByType }) => {
           className="type-button"
           onClick={() => openSlider()}
           style={
-            open ? { backgroundColor: "white" } : { backgroundColor: "#c9dde2" }
+            slider
+              ? { backgroundColor: "white" }
+              : { backgroundColor: "#c9dde2" }
           }
         >
           Stats
         </button>
         <StatsModal
-          onHandleChange={(e) => filterByType(e)}
+          value={value}
+          filterByStats={filterByStats}
           records={stats}
           open={slider}
           handleClose={closeSlider}
