@@ -1,0 +1,35 @@
+.stat-modal {
+  display: flex;
+  position: relative;
+  top: 180px;
+  left: 910px;
+  width: 400px;
+  background-color: white;
+  color: #2e3156;
+  font-weight: 600;
+  padding: 18px;
+  margin: 18px;
+  flex-direction: column;
+  border: none;
+  border-radius: 10px;
+}
+
+.slider-component {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  padding: 2px;
+}
+
+.statName {
+  display: flex;
+  flex: 30%;
+  align-items: flex-start;
+}
+
+.slider {
+  display: flex;
+  flex: 70%;
+  margin: 5px;
+  align-items: flex-end;
+}
