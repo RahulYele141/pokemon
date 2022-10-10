@@ -5,12 +5,21 @@ import "./filters.style.css";
 
 const Filters = ({ searchPokemon, types, stats, filterByType }) => {
   const [open, setOpen] = useState(false);
+  const [slider, setSlider] = useState(false);
 
   const handleOpen = () => {
     return setOpen(!open);
   };
   const handleClose = () => {
     return setOpen(false);
+  };
+
+  const openSlider = () => {
+    return setSlider(!slider);
+  };
+
+  const closeSlider = () => {
+    return setSlider(false);
   };
 
   const capitalize = (s) => {
@@ -57,7 +66,7 @@ const Filters = ({ searchPokemon, types, stats, filterByType }) => {
           value="Types"
           type="button"
           className="type-button"
-          onClick={() => handleOpen()}
+          onClick={() => openSlider()}
           style={
             open ? { backgroundColor: "white" } : { backgroundColor: "#c9dde2" }
           }
@@ -67,8 +76,8 @@ const Filters = ({ searchPokemon, types, stats, filterByType }) => {
         <StatsModal
           onHandleChange={(e) => filterByType(e)}
           records={stats}
-          open={open}
-          handleClose={handleClose}
+          open={slider}
+          handleClose={closeSlider}
         />
       </div>
     </div>

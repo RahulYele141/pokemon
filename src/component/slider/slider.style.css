@@ -2,8 +2,8 @@
   display: flex;
   position: relative;
   top: 180px;
-  left: 910px;
-  width: 400px;
+  left: 710px;
+  width: 600px;
   background-color: white;
   color: #2e3156;
   font-weight: 600;
@@ -17,7 +17,7 @@
 .slider-component {
   display: flex;
   flex-direction: row;
-  margin: 5px;
+  margin: 3px;
   padding: 2px;
 }
 
@@ -29,7 +29,39 @@
 
 .slider {
   display: flex;
+  flex-direction: row;
   flex: 70%;
-  margin: 5px;
+  margin: 3px;
+  padding: 2px;
   align-items: flex-end;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+
+.reset {
+  height: 35px;
+  width: 70px;
+  padding: 2px;
+  margin: 5px;
+  border: 1px solid #2e3156;
+  border-radius: 8px;
+  color: #2e3156;
+  background-color: white;
+}
+
+.apply {
+  height: 35px;
+  width: 70px;
+  padding: 2px;
+  margin: 5px;
+  border: 1px solid #2e3156;
+  border-radius: 8px;
+  color: white;
+  background-color: #2e3156;
 }

@@ -65,6 +65,8 @@ const Home = () => {
     setSearchField();
   };
 
+  console.log(pokemons);
+
   return (
     <div>
       <div>
