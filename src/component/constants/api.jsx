@@ -68,5 +68,5 @@ export const fetchPokemonStats = async () => {
     return name;
   });
 
-  return stats;
+  return stats.slice(0, 6);
 };

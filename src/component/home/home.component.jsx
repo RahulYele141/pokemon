@@ -66,15 +66,25 @@ const Home = () => {
   };
 
   const filterByStats = (values) => {
-    console.log(values, pokemons);
+    let filtered = [];
 
-    // const filtered = pokemons.filter((pk) => {
-    //   if (pk.stats[0].base_stat > value[0] && pk.stats[0].base_stat < value[1])
-    //     return pk;
-    // });
-    // console.log(filtered);
-    // setFilteredPokemons(filtered);
-    // setSearchField();
+    pokemons.forEach((pk, index) => {
+      values.filter((val) => {
+        if (
+          pk.stats[index]?.base_stat > val.value[0] &&
+          pk.stats[index]?.base_stat < val.value[1]
+        ) {
+          const data = filtered.filter((p) => p.name.includes(pk.name));
+          if (!data.length) {
+            filtered.push(pk);
+          }
+        }
+      });
+    });
+
+    console.log(filtered);
+    setFilteredPokemons(filtered);
+    setSearchField();
   };
 
   return (
@@ -115,7 +125,7 @@ const Home = () => {
                     color2={`${color1}`}
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
-                    index={key}
+                    index={pokemon.id}
                   ></Card>
                 </div>
               );
@@ -141,7 +151,7 @@ const Home = () => {
                     color2={`${color1}`}
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
-                    index={key}
+                    index={pokemon.id}
                   ></Card>
                 </div>
               );

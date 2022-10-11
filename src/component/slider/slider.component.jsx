@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./slider.style.css";
 import { Box, Modal, Slider } from "@mui/material";
 
-const minDistance = 10;
-
 const capitalize = (s) => {
   return s[0].toUpperCase() + s.slice(1);
 };
@@ -20,12 +18,9 @@ const StatsModal = ({ records, handleClose, open, filterByStats }) => {
       );
     }
   }, [records, statVals.length]);
-  //  const newRecords = ;
 
   const updateVal = (values, index) => {
-    //console.log(values, index);
     statVals[index].value = values;
-    //  console.log(statVals, "---");
     setStatValues([...statVals]);
   };
 
@@ -66,7 +61,9 @@ const StatsModal = ({ records, handleClose, open, filterByStats }) => {
           );
         })}
         <div className="buttons">
-          <button className="reset">Reset</button>
+          <button className="reset" onClick={() => {}}>
+            Reset
+          </button>
           <button className="apply" onClick={() => filterByStats(statVals)}>
             Apply
           </button>

@@ -16,7 +16,7 @@ const Card = ({ img, pokemon, index, color1, color2 }) => {
       </div>
       <div className="cardItems">
         <h3>{capitalize(pokemon)}</h3>
-        <p>{("00" + (index + 1)).slice(-3)}</p>
+        <p>{("00" + index).slice(-3)}</p>
       </div>
     </div>
   );
