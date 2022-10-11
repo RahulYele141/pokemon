@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./slider.style.css";
 import { Box, Modal, Slider } from "@mui/material";
 
@@ -9,28 +9,24 @@ const capitalize = (s) => {
 };
 
 const StatsModal = ({ records, handleClose, open, filterByStats }) => {
-  const [value, setValue] = useState([60, 150]);
-  const newRecords = records.map((record) => {
-    let abc = {};
-    abc[`${record}`] = value;
-    return abc;
-  });
+  const [statVals, setStatValues] = useState([]);
 
-  newRecords.map((r) => {
-    Object.entries(r).map((rd) => {});
-  });
-
-  const updateVal = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
+  useEffect(() => {
+    if (records && statVals.length === 0) {
+      setStatValues(
+        records.map((record) => {
+          return { key: record, value: [0, 210] };
+        })
+      );
     }
+  }, [records, statVals.length]);
+  //  const newRecords = ;
 
-    if (activeThumb === 0) {
-      setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
-    } else {
-      setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
-    }
-    // console.log("event", event.target.value, value);
+  const updateVal = (values, index) => {
+    //console.log(values, index);
+    statVals[index].value = values;
+    //  console.log(statVals, "---");
+    setStatValues([...statVals]);
   };
 
   return (
@@ -42,15 +38,15 @@ const StatsModal = ({ records, handleClose, open, filterByStats }) => {
     >
       <Box className="stat-modal">
         <h3>Select Stats</h3>
-        {records.map((record, key) => {
+        {statVals.map((record, index) => {
           return (
-            <div>
+            <div key={index}>
               <div
                 className="slider-component"
                 style={{ display: "flex", flexDirection: "row" }}
-                key={key}
+                key={index}
               >
-                <div className="statName">{capitalize(record)}</div>
+                <div className="statName">{capitalize(record.key)}</div>
                 <div className="slider">
                   <Slider
                     sx={{
@@ -59,11 +55,11 @@ const StatsModal = ({ records, handleClose, open, filterByStats }) => {
                       width: "360px",
                     }}
                     valueLabelDisplay="auto"
-                    value={value}
-                    onChange={updateVal}
+                    value={record.value}
+                    onChange={(event) => updateVal(event.target.value, index)}
                     disableSwap
                     max={210}
-                  ></Slider>
+                  />
                 </div>
               </div>
             </div>
@@ -71,7 +67,7 @@ const StatsModal = ({ records, handleClose, open, filterByStats }) => {
         })}
         <div className="buttons">
           <button className="reset">Reset</button>
-          <button className="apply" onClick={filterByStats}>
+          <button className="apply" onClick={() => filterByStats(statVals)}>
             Apply
           </button>
         </div>

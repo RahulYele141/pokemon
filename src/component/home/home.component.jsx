@@ -65,7 +65,17 @@ const Home = () => {
     setSearchField();
   };
 
-  const filterByStats = (event) => {};
+  const filterByStats = (values) => {
+    console.log(values, pokemons);
+
+    // const filtered = pokemons.filter((pk) => {
+    //   if (pk.stats[0].base_stat > value[0] && pk.stats[0].base_stat < value[1])
+    //     return pk;
+    // });
+    // console.log(filtered);
+    // setFilteredPokemons(filtered);
+    // setSearchField();
+  };
 
   return (
     <div>
