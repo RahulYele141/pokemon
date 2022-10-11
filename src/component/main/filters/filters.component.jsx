@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Dropdown from "../dropdown/dropdown.component";
-import StatsModal from "../slider/slider.component";
+import Dropdown from "../../helpers/dropdown/dropdown.component";
+import StatsModal from "../../helpers/slider/slider.component";
 import "./filters.style.css";
 
 const Filters = ({

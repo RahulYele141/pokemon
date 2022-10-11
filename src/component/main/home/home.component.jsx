@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Filters from "../filters/filters.component";
 import Header from "../header/header.component";
-import Card from "../pokecard/card.component";
+import Card from "../../helpers/pokecard/card.component";
 import {
   fetchPokemonData,
   fetchPokemonTypes,
   fetchPokemonStats,
-} from "../constants/api";
+} from "../../constants/api";
 import "./home.style.css";
+import Modal from "../modal/modal.component";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -17,6 +18,11 @@ const Home = () => {
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [pokemonTypes, setPokemonTypes] = useState([]);
   const [stats, setStats] = useState([]);
+  const [openInfoModal, setOpenInfoModal] = useState(false);
+  const [infoModalPokemon, setInfoModalPokemon] = useState();
+
+  const handleOpen = () => setOpenInfoModal(!openInfoModal);
+  const handleClose = () => setOpenInfoModal(false);
 
   useEffect(() => {
     async function getData() {
@@ -67,7 +73,6 @@ const Home = () => {
 
   const filterByStats = (values) => {
     let filtered = [];
-
     pokemons.forEach((pk, index) => {
       values.filter((val) => {
         if (
@@ -81,11 +86,16 @@ const Home = () => {
         }
       });
     });
-
-    console.log(filtered);
     setFilteredPokemons(filtered);
     setSearchField();
   };
+
+  const openModal = async (e, id) => {
+    await setInfoModalPokemon(pokemons.find((pk) => id === pk.id));
+    handleOpen();
+  };
+
+  console.log(infoModalPokemon);
 
   return (
     <div>
@@ -96,7 +106,6 @@ const Home = () => {
         <Filters
           filterByType={filterByType}
           filterByStats={filterByStats}
-          // value={value}
           types={pokemonTypes}
           stats={stats}
           searchPokemon={serachPokemon}
@@ -121,12 +130,19 @@ const Home = () => {
               return (
                 <div className="cards" key={key}>
                   <Card
+                    openModal={openModal}
                     color1={`${color1}`}
                     color2={`${color1}`}
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
                     index={pokemon.id}
                   ></Card>
+                  <Modal
+                    handleClose={handleClose}
+                    records={pokemons}
+                    open={openInfoModal}
+                    infoModalPokemon={infoModalPokemon}
+                  ></Modal>
                 </div>
               );
             })
@@ -147,12 +163,19 @@ const Home = () => {
               return (
                 <div className="cards" key={key}>
                   <Card
+                    openModal={openModal}
                     color1={`${color1}`}
                     color2={`${color1}`}
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
                     index={pokemon.id}
                   ></Card>
+                  <Modal
+                    handleClose={handleClose}
+                    records={pokemons}
+                    open={openInfoModal}
+                    infoModalPokemon={infoModalPokemon}
+                  ></Modal>
                 </div>
               );
             })}
