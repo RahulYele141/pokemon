@@ -1,0 +1,67 @@
+.info-modal_root {
+  display: flex;
+  width: 600px;
+  height: 600px;
+  background-color: #deeded;
+  color: #2e3156;
+  border: none;
+  border-radius: 10px;
+}
+
+.info-modal {
+  display: flex;
+  position: relative;
+  width: 600px;
+  height: 600px;
+  background-color: #deeded;
+  color: #2e3156;
+  font-weight: 600;
+  padding: 18px;
+  margin: 18px;
+  border: none;
+  border-radius: 10px;
+}
+
+.info-image_card {
+  display: flex;
+  width: 180px;
+  height: 270px;
+  border: 2px dashed black;
+  justify-content: center;
+  align-items: center;
+  align-self: baseline;
+  border-radius: 10px;
+}
+
+.info-modal_image_header {
+  display: flex;
+  flex-direction: row;
+  flex: 30%;
+}
+
+.info-modal_para_header {
+  display: flex;
+  flex-direction: column;
+  flex: 70%;
+  margin: 5px;
+  padding: 2px;
+}
+
+.info-modal_header {
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.vertical-line {
+  border-left: 2px solid #70728d;
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+  height: 40px;
+}
+
+.info-modal_para {
+}

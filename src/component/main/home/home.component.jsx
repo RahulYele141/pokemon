@@ -95,7 +95,7 @@ const Home = () => {
     handleOpen();
   };
 
-  console.log(infoModalPokemon);
+  // console.log(infoModalPokemon);
 
   return (
     <div>
