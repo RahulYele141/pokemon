@@ -1,6 +1,7 @@
 const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
 const API_TYPES = "https://pokeapi.co/api/v2/type";
 const API_STATS = "https://pokeapi.co/api/v2/stat";
+const API_DESC = "https://pokeapi.co/api/v2/pokemon-species/";
 
 const colors = [
   "#DDCBD0",
@@ -69,4 +70,20 @@ export const fetchPokemonStats = async () => {
   });
 
   return stats.slice(0, 6);
+};
+
+export const fetchPokemonDesc = async () => {
+  const response = await fetch(`${API_DESC}?limit=18`).then((response) =>
+    response.json()
+  );
+  const json = await response.results;
+
+  const promises = await json.map((url) => {
+    return fetch(`${url.url}`).then((response) => response.json());
+  });
+
+  const allPokemonsDescriptions = await Promise.all(promises).then((result) => {
+    return result;
+  });
+  return allPokemonsDescriptions;
 };

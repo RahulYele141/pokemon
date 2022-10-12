@@ -6,9 +6,11 @@ import {
   fetchPokemonData,
   fetchPokemonTypes,
   fetchPokemonStats,
+  fetchPokemonDesc,
 } from "../../constants/api";
 import "./home.style.css";
 import Modal from "../modal/modal.component";
+import { logDOM } from "@testing-library/react";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -20,21 +22,26 @@ const Home = () => {
   const [stats, setStats] = useState([]);
   const [openInfoModal, setOpenInfoModal] = useState(false);
   const [infoModalPokemon, setInfoModalPokemon] = useState();
+  const [descriptionAll, setDescriptionAll] = useState([]);
+  const [description, setDescription] = useState([]);
 
   const handleOpen = () => setOpenInfoModal(!openInfoModal);
   const handleClose = () => setOpenInfoModal(false);
-
   useEffect(() => {
     async function getData() {
       const response = await fetchPokemonData();
       const { types, values } = await fetchPokemonTypes();
       const stats = await fetchPokemonStats();
+      const desc = await fetchPokemonDesc();
+      setDescriptionAll(desc);
       setStats(stats);
       setPokemons(response);
       setPokemonTypes(types);
       setTypes(values);
     }
     getData();
+
+    getDesc();
   }, []);
 
   const serachPokemon = (e) => {
@@ -89,13 +96,32 @@ const Home = () => {
     setFilteredPokemons(filtered);
     setSearchField();
   };
-
+  const getDesc = () => {
+    let newArr = [];
+    descriptionAll.map((des) => {
+      let filteredText = [];
+      des.flavor_text_entries.map((text) => {
+        if (text.language.name === "en") {
+          const data = filteredText.filter((t) => {
+            return t.includes(text.flavor_text);
+          });
+          if (!data.length) {
+            filteredText.push(text.flavor_text);
+          }
+        }
+      });
+      newArr.push(filteredText);
+    });
+    setDescription(newArr);
+  };
   const openModal = async (e, id) => {
+    await getDesc();
     await setInfoModalPokemon(pokemons.find((pk) => id === pk.id));
     handleOpen();
   };
-
-  // console.log(infoModalPokemon);
+  const showFullDescription = (e) => {
+    console.log(e);
+  };
 
   return (
     <div>
@@ -116,16 +142,13 @@ const Home = () => {
           ? pokemons.map((pokemon, key) => {
               const pokemonKindList = pokemon.types.slice(0, 1);
               const pokemonKindName1 = pokemonKindList[0]?.type?.name;
-              // const pokemonKindName2 = pokemonKindList[1]?.type?.name;
 
               const pokemonTypes = types.filter((type) => {
                 const isTypeExist = type.hasOwnProperty(pokemonKindName1);
-                //||type.hasOwnProperty(pokemonKindName2);
                 return isTypeExist;
               });
 
               const color1 = pokemonTypes[0][pokemonKindName1];
-              //const color2 = pokemonTypes[1][pokemonKindName2]? pokemonTypes[1][pokemonKindName2]: '';
 
               return (
                 <div className="cards" key={key}>
@@ -138,6 +161,8 @@ const Home = () => {
                     index={pokemon.id}
                   ></Card>
                   <Modal
+                    showFullDescription={showFullDescription}
+                    description={description}
                     handleClose={handleClose}
                     records={pokemons}
                     open={openInfoModal}
@@ -149,16 +174,13 @@ const Home = () => {
           : filteredPokemons.map((pokemon, key) => {
               const pokemonKindList = pokemon.types.slice(0, 1);
               const pokemonKindName1 = pokemonKindList[0]?.type?.name;
-              // const pokemonKindName2 = pokemonKindList[1]?.type?.name;
 
               const pokemonTypes = types.filter((type) => {
                 const isTypeExist = type.hasOwnProperty(pokemonKindName1);
-                //||type.hasOwnProperty(pokemonKindName2);
                 return isTypeExist;
               });
 
               const color1 = pokemonTypes[0][pokemonKindName1];
-              //const color2 = pokemonTypes[1][pokemonKindName2]? pokemonTypes[1][pokemonKindName2]: '';
 
               return (
                 <div className="cards" key={key}>
@@ -171,6 +193,8 @@ const Home = () => {
                     index={pokemon.id}
                   ></Card>
                   <Modal
+                    showFullDescription={showFullDescription}
+                    description={description}
                     handleClose={handleClose}
                     records={pokemons}
                     open={openInfoModal}

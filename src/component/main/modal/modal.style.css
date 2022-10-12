@@ -1,7 +1,8 @@
 .info-modal_root {
   display: flex;
+  flex-direction: column;
   width: 600px;
-  height: 600px;
+  height: auto;
   background-color: #deeded;
   color: #2e3156;
   border: none;
@@ -12,7 +13,7 @@
   display: flex;
   position: relative;
   width: 600px;
-  height: 600px;
+  height: auto;
   background-color: #deeded;
   color: #2e3156;
   font-weight: 600;
@@ -36,7 +37,7 @@
 .info-modal_image_header {
   display: flex;
   flex-direction: row;
-  flex: 30%;
+  /* flex: 30%; */
 }
 
 .info-modal_para_header {
@@ -64,4 +65,72 @@
 }
 
 .info-modal_para {
+  display: block;
+}
+
+.info-modal_details {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-modal_details_row1 {
+  display: flex;
+  flex-direction: row;
+}
+
+.info-modal_details_row2 {
+  display: flex;
+  flex-direction: row;
+}
+.info-modal_details_content {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.stats-row {
+  display: flex;
+  flex-direction: column;
+  background-color: #b0d2d2;
+  border-radius: 10px;
+  padding: 5px;
+}
+.stats-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
+.stats-progress {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+progress {
+  position: relative;
+  width: 140px;
+}
+
+progress::before,
+progress::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+progress::before {
+  width: 100%;
+  background: #93b2b2;
+}
+
+progress::after {
+  width: 75%;
+  background: #2e3156;
+}
+
+label {
+  width: 80px;
 }

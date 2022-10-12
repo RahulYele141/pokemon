@@ -2,8 +2,13 @@ import { Box, Modal } from "@mui/material";
 import React from "react";
 import "./modal.style.css";
 
-const InfoModal = ({ infoModalPokemon, handleClose, open }) => {
-  console.log(infoModalPokemon);
+const InfoModal = ({
+  infoModalPokemon,
+  handleClose,
+  open,
+  description,
+  showFullDescription,
+}) => {
   return (
     <Modal
       keepMounted
@@ -42,12 +47,118 @@ const InfoModal = ({ infoModalPokemon, handleClose, open }) => {
                 <div className="vertical-line"></div>
               </div>
               <div className="info-modal_para">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
-                  eligendi neque iste veritatis accusamus earum ipsum ducimus,
-                  at eius, beatae consequuntur aspernatur eum quas blanditiis
-                  sapiente natus saepe facilis corrupti.
+                <p style={{ margin: "0", display: "inline" }}>
+                  {description[infoModalPokemon?.id - 1]
+                    ?.slice(0, 4)
+                    .join("\f")}
+                  ...
+                  <p
+                    onMouseEnter={(e) => showFullDescription(e)}
+                    style={{
+                      margin: "0",
+                      display: "inline",
+                    }}
+                  >
+                    <u>read more</u>
+                  </p>
                 </p>
+              </div>
+            </div>
+          </div>
+          <div className="info-modal_details">
+            <div className="info-modal_details_row1">
+              <div className="info-modal_details_content">
+                <h4>Height</h4>
+                <p>{infoModalPokemon?.height}'</p>
+              </div>
+              <div className="info-modal_details_content">
+                <h4>Weight</h4> <p>{infoModalPokemon?.weight} Kg</p>
+              </div>
+              <div className="info-modal_details_content">
+                <h4>Gender(s)</h4> <p>{}</p>
+              </div>
+              <div className="info-modal_details_content">
+                <h4>Egg Groups</h4> <p>{}</p>
+              </div>
+            </div>
+            <div className="info-modal_details_row2">
+              <div className="info-modal_details_content">
+                <h4>Abilities</h4>{" "}
+                <p>
+                  {infoModalPokemon?.abilities[0]?.ability.name},{" "}
+                  {infoModalPokemon?.abilities[1]?.ability.name}
+                </p>
+              </div>
+              <div className="info-modal_details_content">
+                <h4>Types</h4>{" "}
+                <p>
+                  {infoModalPokemon?.types[0]?.type.name},{" "}
+                  {infoModalPokemon?.types[1]?.type.name}
+                </p>
+              </div>
+              <div className="info-modal_details_content">
+                <h4>Weak against</h4> <p></p>
+              </div>
+            </div>
+          </div>
+          <div className="stats-row">
+            <h3>Stats</h3>
+            <div className="stats-list">
+              <div className="stats-progress">
+                <label>
+                  {`${infoModalPokemon?.stats[0].stat.name}`.toUpperCase()}
+                </label>
+                <progress
+                  value={infoModalPokemon?.stats[0].base_stat}
+                  max="100"
+                ></progress>
+              </div>
+              <div className="stats-progress">
+                <label>
+                  {`${infoModalPokemon?.stats[2].stat.name}`.toUpperCase()}
+                </label>
+                <progress
+                  value={infoModalPokemon?.stats[2].base_stat}
+                  max="100"
+                >
+                  {infoModalPokemon?.stats[2].base_stat}
+                </progress>
+              </div>
+              <div className="stats-progress">
+                <label>
+                  {`${infoModalPokemon?.stats[4].stat.name}`.toUpperCase()}
+                </label>
+                <progress
+                  value={infoModalPokemon?.stats[4].base_stat}
+                  max="100"
+                ></progress>
+              </div>
+              <div className="stats-progress">
+                <label>
+                  {`${infoModalPokemon?.stats[1].stat.name}`.toUpperCase()}
+                </label>
+                <progress
+                  value={infoModalPokemon?.stats[1].base_stat}
+                  max="100"
+                ></progress>
+              </div>
+              <div className="stats-progress">
+                <label>
+                  {`${infoModalPokemon?.stats[3].stat.name}`.toUpperCase()}
+                </label>
+                <progress
+                  value={infoModalPokemon?.stats[3].base_stat}
+                  max="100"
+                ></progress>
+              </div>
+              <div className="stats-progress">
+                <label>
+                  {`${infoModalPokemon?.stats[5].stat.name}`.toUpperCase()}
+                </label>
+                <progress
+                  value={infoModalPokemon?.stats[5].base_stat}
+                  max="100"
+                ></progress>
               </div>
             </div>
           </div>
