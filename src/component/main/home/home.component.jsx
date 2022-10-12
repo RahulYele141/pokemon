@@ -10,7 +10,6 @@ import {
 } from "../../constants/api";
 import "./home.style.css";
 import Modal from "../modal/modal.component";
-import { logDOM } from "@testing-library/react";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -140,14 +139,14 @@ const Home = () => {
       <div className="home">
         {filteredPokemons.length === 0 || searchField === ""
           ? pokemons.map((pokemon, key) => {
-              const pokemonKindList = pokemon.types.slice(0, 1);
+              const pokemonKindList = pokemon?.types;
               const pokemonKindName1 = pokemonKindList[0]?.type?.name;
+              const pokemonKindName2 = pokemonKindList[1]?.type?.name;
 
               const pokemonTypes = types.filter((type) => {
                 const isTypeExist = type.hasOwnProperty(pokemonKindName1);
                 return isTypeExist;
               });
-
               const color1 = pokemonTypes[0][pokemonKindName1];
 
               return (
@@ -160,14 +159,6 @@ const Home = () => {
                     pokemon={pokemon.name}
                     index={pokemon.id}
                   ></Card>
-                  <Modal
-                    showFullDescription={showFullDescription}
-                    description={description}
-                    handleClose={handleClose}
-                    records={pokemons}
-                    open={openInfoModal}
-                    infoModalPokemon={infoModalPokemon}
-                  ></Modal>
                 </div>
               );
             })
@@ -192,17 +183,17 @@ const Home = () => {
                     pokemon={pokemon.name}
                     index={pokemon.id}
                   ></Card>
-                  <Modal
-                    showFullDescription={showFullDescription}
-                    description={description}
-                    handleClose={handleClose}
-                    records={pokemons}
-                    open={openInfoModal}
-                    infoModalPokemon={infoModalPokemon}
-                  ></Modal>
                 </div>
               );
             })}
+        <Modal
+          showFullDescription={showFullDescription}
+          description={description}
+          handleClose={handleClose}
+          records={pokemons}
+          open={openInfoModal}
+          infoModalPokemon={infoModalPokemon}
+        ></Modal>
       </div>
     </div>
   );

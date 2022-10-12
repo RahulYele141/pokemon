@@ -1,5 +1,6 @@
 import { Box, Modal } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import DescPopover from "../../helpers/descPopover/descPopover.component";
 import "./modal.style.css";
 
 const InfoModal = ({
@@ -7,7 +8,8 @@ const InfoModal = ({
   handleClose,
   open,
   description,
-  showFullDescription,
+
+  openReadMore,
 }) => {
   return (
     <Modal
@@ -52,17 +54,24 @@ const InfoModal = ({
                     ?.slice(0, 4)
                     .join("\f")}
                   ...
-                  <p
-                    onMouseEnter={(e) => showFullDescription(e)}
-                    style={{
-                      margin: "0",
-                      display: "inline",
-                    }}
-                  >
-                    <u>read more</u>
-                  </p>
+                </p>
+                <p
+                  // onClick={(e) => showFullDescription(e)}
+                  style={{
+                    margin: "0",
+                    display: "inline",
+                  }}
+                >
+                  <u>
+                    <DescPopover
+                      description={description[
+                        infoModalPokemon?.id - 1
+                      ]?.join()}
+                    ></DescPopover>
+                  </u>
                 </p>
               </div>
+              <div className="read-more_modal"></div>
             </div>
           </div>
           <div className="info-modal_details">
