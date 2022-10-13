@@ -98,9 +98,10 @@ export const fetchPokemonEvolution = async (id) => {
   const evolResponse = await fetch(`${evolve}`).then((response) =>
     response.json()
   );
-  const firstSpec = evolResponse.chain.species.name;
-  const secondSec = evolResponse.chain.evolves_to[0].species.name;
-  const thirdSpec = evolResponse.chain.evolves_to[0].evolves_to[0].species.name;
+  const firstSpec = evolResponse?.chain?.species.name;
+  const secondSec = evolResponse?.chain?.evolves_to[0]?.species.name;
+  const thirdSpec =
+    evolResponse?.chain?.evolves_to[0]?.evolves_to[0]?.species.name;
 
   return { firstSpec, secondSec, thirdSpec };
 };
