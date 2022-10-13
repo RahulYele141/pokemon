@@ -1,6 +1,6 @@
 .stat-modal {
   display: flex;
-  position: relative;
+  position: fixed;
   top: 180px;
   left: 710px;
   width: 600px;

@@ -7,6 +7,7 @@ import {
   fetchPokemonTypes,
   fetchPokemonStats,
   fetchPokemonDesc,
+  fetchPokemonEvolution,
 } from "../../constants/api";
 import "./home.style.css";
 import InfoModal from "../modal/modal.component";
@@ -23,7 +24,8 @@ const Home = () => {
   const [infoModalPokemon, setInfoModalPokemon] = useState();
   const [descriptionAll, setDescriptionAll] = useState([]);
   const [description, setDescription] = useState([]);
-  const [currentId, setCurrentId] = useState(0);
+  const [currentId, setCurrentId] = useState();
+  const [evolPokemons, setEvolPokemons] = useState([]);
 
   const handleOpen = () => setOpenInfoModal(!openInfoModal);
   const handleClose = () => setOpenInfoModal(false);
@@ -33,6 +35,7 @@ const Home = () => {
       const { types, values } = await fetchPokemonTypes();
       const stats = await fetchPokemonStats();
       const desc = await fetchPokemonDesc();
+      //  const evolve = await fetchPokemonEvolution();
       setDescriptionAll(desc);
       setStats(stats);
       setPokemons(response);
@@ -114,24 +117,56 @@ const Home = () => {
     });
     setDescription(newArr);
   };
+
   const openModal = async (e, id) => {
-    setCurrentId(id);
-    console.log(currentId);
     await getDesc();
-    await setInfoModalPokemon(pokemons.find((pk) => id === pk.id));
+
+    await setInfoModalPokemon(
+      pokemons.find((pk) => {
+        setCurrentId(pk.id);
+        return id === pk.id;
+      })
+    );
+    const pokemon = pokemons.find((pk) => id === pk.id);
+    console.log(pokemon);
+    const { firstSpec, secondSec, thirdSpec } = await fetchPokemonEvolution(
+      pokemon.id
+    );
+    const firstPokemon = pokemons.find((pk) => {
+      return pk.name === firstSpec;
+    });
+
+    const secondPokemon = pokemons.find((pk) => {
+      return pk.name === secondSec;
+    });
+
+    const thirdPokemon = pokemons.find((pk) => {
+      return pk.name === thirdSpec;
+    });
+
+    setEvolPokemons([firstPokemon, secondPokemon, thirdPokemon]);
+
     handleOpen();
   };
+  console.log(evolPokemons);
   const prevPokemon = async (e) => {
-    console.log("currentId", currentId);
-    setCurrentId(currentId - 1);
-    if (currentId === 2) setCurrentId(2);
-    await setInfoModalPokemon(pokemons[currentId - 2]);
+    if (currentId === 1) {
+      setInfoModalPokemon(pokemons[0]);
+    } else {
+      setCurrentId(currentId - 1);
+      setInfoModalPokemon(pokemons[currentId]);
+    }
   };
 
   const nextPokemon = async (e) => {
-    console.log("currentId", currentId);
-    setCurrentId(currentId + 1);
-    await setInfoModalPokemon(pokemons[currentId]);
+    const lastItemIndex = pokemons.lastIndexOf(pokemons.slice(-1).pop());
+    if (currentId === lastItemIndex) {
+      setCurrentId(lastItemIndex);
+      setInfoModalPokemon(pokemons[currentId]);
+    } else {
+      setCurrentId(currentId + 1);
+      setInfoModalPokemon(pokemons[currentId]);
+    }
   };
 
   return (
@@ -203,6 +238,7 @@ const Home = () => {
                 </div>
               );
             })}
+
         <InfoModal
           description={description}
           handleClose={handleClose}
@@ -210,7 +246,8 @@ const Home = () => {
           infoModalPokemon={infoModalPokemon}
           prevPokemon={prevPokemon}
           nextPokemon={nextPokemon}
-        ></InfoModal>
+          evolPokemons={evolPokemons}
+        />
       </div>
     </div>
   );

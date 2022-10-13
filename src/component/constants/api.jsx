@@ -1,7 +1,7 @@
 const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
 const API_TYPES = "https://pokeapi.co/api/v2/type";
 const API_STATS = "https://pokeapi.co/api/v2/stat";
-const API_DESC = "https://pokeapi.co/api/v2/pokemon-species/";
+const API_SPEC = "https://pokeapi.co/api/v2/pokemon-species/";
 
 const colors = [
   "#DDCBD0",
@@ -73,7 +73,7 @@ export const fetchPokemonStats = async () => {
 };
 
 export const fetchPokemonDesc = async () => {
-  const response = await fetch(`${API_DESC}?limit=18`).then((response) =>
+  const response = await fetch(`${API_SPEC}?limit=18`).then((response) =>
     response.json()
   );
   const json = await response.results;
@@ -86,4 +86,21 @@ export const fetchPokemonDesc = async () => {
     return result;
   });
   return allPokemonsDescriptions;
+};
+
+export const fetchPokemonEvolution = async (id) => {
+  console.log(id);
+  const response = await fetch(`${API_SPEC}${id}`).then((response) =>
+    response.json()
+  );
+  const evolve = response.evolution_chain.url;
+
+  const evolResponse = await fetch(`${evolve}`).then((response) =>
+    response.json()
+  );
+  const firstSpec = evolResponse.chain.species.name;
+  const secondSec = evolResponse.chain.evolves_to[0].species.name;
+  const thirdSpec = evolResponse.chain.evolves_to[0].evolves_to[0].species.name;
+
+  return { firstSpec, secondSec, thirdSpec };
 };

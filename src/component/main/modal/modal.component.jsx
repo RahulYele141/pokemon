@@ -9,9 +9,8 @@ const InfoModal = ({
   description,
   prevPokemon,
   nextPokemon,
+  evolPokemons,
 }) => {
-  let id = infoModalPokemon?.id;
-  console.log(id);
   return (
     <Modal
       keepMounted
@@ -45,13 +44,20 @@ const InfoModal = ({
                 </div>
                 <div className="vertical-line"></div>
                 <div>
-                  <h2>{("00" + id).slice(-3)}</h2>
+                  <h2>{("00" + infoModalPokemon?.id).slice(-3)}</h2>
                 </div>
                 <div className="vertical-line"></div>
-                <div className="info-modal_header_buttons">
+                <div
+                  className="info-modal_header_buttons"
+                  style={{ width: "80px" }}
+                >
                   <h2
                     onClick={(e) => prevPokemon(e)}
-                    style={{ display: "inline", padding: "2px" }}
+                    style={{
+                      cursor: "pointer",
+                      display: "inline",
+                      padding: "2px",
+                    }}
                   >
                     &#8592;
                   </h2>
@@ -60,7 +66,11 @@ const InfoModal = ({
                   </h2>
                   <h2
                     onClick={(e) => nextPokemon(e)}
-                    style={{ display: "inline", padding: "2px" }}
+                    style={{
+                      cursor: "pointer",
+                      display: "inline",
+                      padding: "2px",
+                    }}
                   >
                     &#8594;
                   </h2>
@@ -68,7 +78,9 @@ const InfoModal = ({
               </div>
               <div className="info-modal_para">
                 <p style={{ margin: "0", display: "inline" }}>
-                  {description[id - 1]?.slice(0, 4).join("\f")}
+                  {description[infoModalPokemon?.id - 1]
+                    ?.slice(0, 4)
+                    .join("\f")}
                   ...
                 </p>
                 <p
@@ -183,6 +195,72 @@ const InfoModal = ({
                   value={infoModalPokemon?.stats[5].base_stat}
                   max="100"
                 ></progress>
+              </div>
+            </div>
+          </div>
+          <div className="evolution-main">
+            <div className="evolution-heading">
+              <h3>Evolution Chain</h3>
+            </div>
+            <div className="evolution-chain">
+              <div
+                className="evolution-main_card"
+                style={{
+                  backgroundColor: `#DDCBD0`,
+                }}
+                a
+              >
+                <div className="evolution-cardImage">
+                  <img
+                    src={`${evolPokemons[0]?.sprites.other.dream_world.front_default}`}
+                    alt={"pokemon"}
+                    className="image"
+                  />
+                </div>
+                <div className="evolution-cardItems">
+                  <h3>{evolPokemons[0]?.name}</h3>
+                  <p>{("00" + evolPokemons[0]?.id).slice(-3)}</p>
+                </div>
+              </div>
+              <h2 className="evolution-chain_arrow">&#8594;</h2>
+              <div
+                className="evolution-main_card"
+                style={{
+                  backgroundColor: `#DDCBD0`,
+                }}
+                a
+              >
+                <div className="evolution-cardImage">
+                  <img
+                    src={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
+                    alt={"pokemon"}
+                    className="image"
+                  />
+                </div>
+                <div className="evolution-cardItems">
+                  <h3>{evolPokemons[1]?.name}</h3>
+                  <p>{("00" + evolPokemons[1]?.id).slice(-3)}</p>
+                </div>
+              </div>
+              <h2 className="evolution-chain_arrow">&#8594;</h2>
+              <div
+                className="evolution-main_card"
+                style={{
+                  backgroundColor: `#DDCBD0`,
+                }}
+                a
+              >
+                <div className="evolution-cardImage">
+                  <img
+                    src={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
+                    alt={"pokemon"}
+                    className="image"
+                  />
+                </div>
+                <div className="evolution-cardItems">
+                  <h3>{evolPokemons[2]?.name}</h3>
+                  <p>{("00" + evolPokemons[2]?.id).slice(-3)}</p>
+                </div>
               </div>
             </div>
           </div>
