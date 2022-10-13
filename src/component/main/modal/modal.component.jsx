@@ -1,5 +1,4 @@
 import { Box, Modal } from "@mui/material";
-import React, { useState } from "react";
 import DescPopover from "../../helpers/descPopover/descPopover.component";
 import "./modal.style.css";
 
@@ -8,9 +7,11 @@ const InfoModal = ({
   handleClose,
   open,
   description,
-
-  openReadMore,
+  prevPokemon,
+  nextPokemon,
 }) => {
+  let id = infoModalPokemon?.id;
+  console.log(id);
   return (
     <Modal
       keepMounted
@@ -44,19 +45,33 @@ const InfoModal = ({
                 </div>
                 <div className="vertical-line"></div>
                 <div>
-                  <h2>{("00" + infoModalPokemon?.id).slice(-3)}</h2>
+                  <h2>{("00" + id).slice(-3)}</h2>
                 </div>
                 <div className="vertical-line"></div>
+                <div className="info-modal_header_buttons">
+                  <h2
+                    onClick={(e) => prevPokemon(e)}
+                    style={{ display: "inline", padding: "2px" }}
+                  >
+                    &#8592;
+                  </h2>
+                  <h2 style={{ display: "inline", padding: "2px" }}>
+                    &#10539;
+                  </h2>
+                  <h2
+                    onClick={(e) => nextPokemon(e)}
+                    style={{ display: "inline", padding: "2px" }}
+                  >
+                    &#8594;
+                  </h2>
+                </div>
               </div>
               <div className="info-modal_para">
                 <p style={{ margin: "0", display: "inline" }}>
-                  {description[infoModalPokemon?.id - 1]
-                    ?.slice(0, 4)
-                    .join("\f")}
+                  {description[id - 1]?.slice(0, 4).join("\f")}
                   ...
                 </p>
                 <p
-                  // onClick={(e) => showFullDescription(e)}
                   style={{
                     margin: "0",
                     display: "inline",
@@ -64,9 +79,9 @@ const InfoModal = ({
                 >
                   <u>
                     <DescPopover
-                      description={description[
-                        infoModalPokemon?.id - 1
-                      ]?.join()}
+                      description={description[infoModalPokemon?.id - 1]
+                        ?.slice(0, 10)
+                        .join()}
                     ></DescPopover>
                   </u>
                 </p>

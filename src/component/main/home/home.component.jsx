@@ -9,7 +9,7 @@ import {
   fetchPokemonDesc,
 } from "../../constants/api";
 import "./home.style.css";
-import Modal from "../modal/modal.component";
+import InfoModal from "../modal/modal.component";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -23,6 +23,7 @@ const Home = () => {
   const [infoModalPokemon, setInfoModalPokemon] = useState();
   const [descriptionAll, setDescriptionAll] = useState([]);
   const [description, setDescription] = useState([]);
+  const [currentId, setCurrentId] = useState(0);
 
   const handleOpen = () => setOpenInfoModal(!openInfoModal);
   const handleClose = () => setOpenInfoModal(false);
@@ -114,12 +115,23 @@ const Home = () => {
     setDescription(newArr);
   };
   const openModal = async (e, id) => {
+    setCurrentId(id);
+    console.log(currentId);
     await getDesc();
     await setInfoModalPokemon(pokemons.find((pk) => id === pk.id));
     handleOpen();
   };
-  const showFullDescription = (e) => {
-    console.log(e);
+  const prevPokemon = async (e) => {
+    console.log("currentId", currentId);
+    setCurrentId(currentId - 1);
+    if (currentId === 2) setCurrentId(2);
+    await setInfoModalPokemon(pokemons[currentId - 2]);
+  };
+
+  const nextPokemon = async (e) => {
+    console.log("currentId", currentId);
+    setCurrentId(currentId + 1);
+    await setInfoModalPokemon(pokemons[currentId]);
   };
 
   return (
@@ -144,17 +156,22 @@ const Home = () => {
               const pokemonKindName2 = pokemonKindList[1]?.type?.name;
 
               const pokemonTypes = types.filter((type) => {
-                const isTypeExist = type.hasOwnProperty(pokemonKindName1);
+                const isTypeExist =
+                  type.hasOwnProperty(pokemonKindName1) ||
+                  type.hasOwnProperty(pokemonKindName2);
                 return isTypeExist;
               });
-              const color1 = pokemonTypes[0][pokemonKindName1];
+              const color1 = pokemonTypes[0]?.[pokemonKindName1];
+              const color2 = pokemonTypes[1]?.[pokemonKindName1];
+              const colorA = color1 === undefined ? color2 : color1;
+              const colorB = color2 === undefined ? color1 : color2;
 
               return (
                 <div className="cards" key={key}>
                   <Card
                     openModal={openModal}
-                    color1={`${color1}`}
-                    color2={`${color1}`}
+                    color1={`${colorA}`}
+                    color2={`${colorB}`}
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
                     index={pokemon.id}
@@ -186,14 +203,14 @@ const Home = () => {
                 </div>
               );
             })}
-        <Modal
-          showFullDescription={showFullDescription}
+        <InfoModal
           description={description}
           handleClose={handleClose}
-          records={pokemons}
           open={openInfoModal}
           infoModalPokemon={infoModalPokemon}
-        ></Modal>
+          prevPokemon={prevPokemon}
+          nextPokemon={nextPokemon}
+        ></InfoModal>
       </div>
     </div>
   );

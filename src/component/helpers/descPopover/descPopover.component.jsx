@@ -1,7 +1,5 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import { maxWidth } from "@mui/system";
 
 export default function DescPopover({ description }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -31,6 +29,7 @@ export default function DescPopover({ description }) {
         Read more
       </p>
       <Popover
+        sx={{ position: "", width: "800px", color: "#2E3156" }}
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -40,7 +39,7 @@ export default function DescPopover({ description }) {
           horizontal: "left",
         }}
       >
-        <p sx={{ p: 2, maxWidth: "400px" }}>{description}</p>
+        <p sx={{ p: 1, maxWidth: "400px" }}>{description}</p>
       </Popover>
     </div>
   );
