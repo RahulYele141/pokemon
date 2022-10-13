@@ -209,77 +209,18 @@ const InfoModal = ({
                 pokemon={evolPokemons[0]?.name}
                 index={evolPokemons[0]?.id}
               />
-              {/* <div
-                className="evolution-main_card"
-                style={{
-                  backgroundColor: `#DDCBD0`,
-                }}
-                a
-              >
-                <div className="evolution-cardImage">
-                  <img
-                    src={`${evolPokemons[0]?.sprites.other.dream_world.front_default}`}
-                    alt={"pokemon"}
-                    className="image"
-                  />
-                </div>
-                <div className="evolution-cardItems">
-                  <h3>{evolPokemons[0]?.name}</h3>
-                  <p>{("00" + evolPokemons[0]?.id).slice(-3)}</p>
-                </div>
-              </div>
-               */}
               <h2 className="evolution-chain_arrow">&#8594;</h2>
               <Card
                 img={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
                 pokemon={evolPokemons[1]?.name}
                 index={evolPokemons[1]?.id}
               />
-              {/* <div
-                className="evolution-main_card"
-                style={{
-                  backgroundColor: `#DDCBD0`,
-                }}
-                a
-              >
-                <div className="evolution-cardImage">
-                  <img
-                    src={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
-                    alt={"pokemon"}
-                    className="image"
-                  />
-                </div>
-                <div className="evolution-cardItems">
-                  <h3>{evolPokemons[1]?.name}</h3>
-                  <p>{("00" + evolPokemons[1]?.id).slice(-3)}</p>
-                </div>
-              </div> */}
               <h2 className="evolution-chain_arrow">&#8594;</h2>
               <Card
                 img={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
                 pokemon={evolPokemons[2]?.name}
                 index={evolPokemons[2]?.id}
               />
-              {/*               
-              <div
-                className="evolution-main_card"
-                style={{
-                  backgroundColor: `#DDCBD0`,
-                }}
-                a
-              >
-                <div className="evolution-cardImage">
-                  <img
-                    src={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
-                    alt={"pokemon"}
-                    className="image"
-                  />
-                </div>
-                <div className="evolution-cardItems">
-                  <h3>{evolPokemons[2]?.name}</h3>
-                  <p>{("00" + evolPokemons[2]?.id).slice(-3)}</p>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

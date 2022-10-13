@@ -4,6 +4,8 @@
   width: 600px;
   height: 90%;
   overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   background-color: #deeded;
   color: #2e3156;
   border: none;
@@ -16,6 +18,7 @@
   width: 600px;
   height: 90%;
   overflow: hidden;
+
   background-color: #deeded;
   color: #2e3156;
   font-weight: 600;
@@ -23,6 +26,10 @@
   margin: 18px;
   border: none;
   border-radius: 10px;
+}
+
+.info-modal_root::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 .info-image_card {
