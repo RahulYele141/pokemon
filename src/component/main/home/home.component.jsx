@@ -128,7 +128,6 @@ const Home = () => {
       })
     );
     const pokemon = pokemons.find((pk) => id === pk.id);
-    console.log(pokemon);
     const { firstSpec, secondSec, thirdSpec } = await fetchPokemonEvolution(
       pokemon.id
     );
@@ -148,7 +147,6 @@ const Home = () => {
 
     handleOpen();
   };
-  console.log(evolPokemons);
   const prevPokemon = async (e) => {
     if (currentId === 1) {
       setInfoModalPokemon(pokemons[0]);
@@ -196,17 +194,28 @@ const Home = () => {
                   type.hasOwnProperty(pokemonKindName2);
                 return isTypeExist;
               });
-              const color1 = pokemonTypes[0]?.[pokemonKindName1];
-              const color2 = pokemonTypes[1]?.[pokemonKindName1];
-              const colorA = color1 === undefined ? color2 : color1;
-              const colorB = color2 === undefined ? color1 : color2;
+              // console.log(pokemonTypes);
+              const color1 = pokemonTypes.find((color) => {
+                return color[pokemonKindName1];
+              });
+              const color2 = pokemonTypes.find((color) => {
+                return color[pokemonKindName2] || color[pokemonKindName1];
+              });
 
+              const colorFinal = () => {
+                if (!color2[pokemonKindName1]) {
+                  return `${`linear-gradient(${color1[pokemonKindName1]}, ${color2[pokemonKindName2]})`}`;
+                } else {
+                  return `${`linear-gradient(${color1[pokemonKindName1]}, ${color1[pokemonKindName1]})`}`;
+                }
+              };
+
+              console.log(colorFinal());
               return (
                 <div className="cards" key={key}>
                   <Card
                     openModal={openModal}
-                    color1={`${colorA}`}
-                    color2={`${colorB}`}
+                    color={colorFinal()}
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
                     index={pokemon.id}

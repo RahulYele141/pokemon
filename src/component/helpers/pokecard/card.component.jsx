@@ -2,15 +2,16 @@ import React from "react";
 
 import "./card.style.css";
 
-const Card = ({ img, pokemon, index, color1, color2, openModal }) => {
+const Card = ({ img, pokemon, index, color, openModal }) => {
   function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1);
   }
+  // console.log(color);
   return (
     <div
       onClick={(e) => openModal(e, index)}
       className="card"
-      style={{ backgroundImage: `linear-gradient(${color1}, ${color2})` }}
+      style={{ backgroundImage: `${color}` }}
     >
       <div className="cardImage">
         <img src={`${img}`} alt={"pokemon"} className="image" />
