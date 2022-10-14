@@ -15,7 +15,7 @@ import InfoModal from "../modal/modal.component";
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
   const [types, setTypes] = useState([]);
-  const [searchField, setSearchField] = useState("");
+  const [searchField, setSearchField] = useState();
   const [typeField, setTypeField] = useState([]);
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [pokemonTypes, setPokemonTypes] = useState([]);
@@ -26,7 +26,7 @@ const Home = () => {
   const [description, setDescription] = useState([]);
   const [currentId, setCurrentId] = useState();
   const [evolPokemons, setEvolPokemons] = useState([]);
-  const [evolColor, setEvolColor] = useState();
+  const [evolColor, setEvolColor] = useState([]);
 
   const handleOpen = () => setOpenInfoModal(!openInfoModal);
   const handleClose = () => setOpenInfoModal(false);
@@ -84,14 +84,15 @@ const Home = () => {
 
   const filterByStats = (values) => {
     let filtered = [];
+    let data = [];
 
-    pokemons.forEach((pk, index) => {
-      values.map((val) => {
+    pokemons.map((pk, index) => {
+      values.filter((val) => {
         if (
           pk.stats[index]?.base_stat > val.value[0] &&
           pk.stats[index]?.base_stat < val.value[1]
         ) {
-          const data = filtered.filter((p) => p.name.includes(pk.name));
+          data = filtered.filter((p) => p.name.includes(pk.name));
           if (!data.length) filtered.push(pk);
         }
       });
@@ -148,8 +149,10 @@ const Home = () => {
     const thirdPokemon = pokemons.find((pk) => {
       return pk.name === thirdSpec;
     });
-    const evol = color(infoModalPokemon);
-    setEvolColor(evol);
+    const evol1 = color(firstPokemon);
+    const evol2 = color(secondPokemon);
+    const evol3 = color(thirdPokemon);
+    setEvolColor([evol1, evol2, evol3]);
     setEvolPokemons([firstPokemon, secondPokemon, thirdPokemon]);
 
     handleOpen();

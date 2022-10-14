@@ -13,6 +13,7 @@ const InfoModal = ({
   evolPokemons,
   evolColor,
 }) => {
+  console.log(evolColor);
   const progressBar = (name, value) => {
     return (
       <div
@@ -243,7 +244,7 @@ const InfoModal = ({
                   img={`${evolPokemons[0]?.sprites.other.dream_world.front_default}`}
                   pokemon={evolPokemons[0]?.name}
                   index={evolPokemons[0]?.id}
-                  color={evolColor}
+                  color={evolColor[0]}
                 />
               ) : (
                 ""
@@ -257,7 +258,7 @@ const InfoModal = ({
                 img={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
                 pokemon={evolPokemons[1]?.name}
                 index={evolPokemons[1]?.id}
-                color={evolColor}
+                color={evolColor[1]}
               />
               {evolPokemons[2] ? (
                 <h2 className="evolution-chain_arrow">&#8594;</h2>
@@ -269,7 +270,7 @@ const InfoModal = ({
                   img={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
                   pokemon={evolPokemons[2]?.name}
                   index={evolPokemons[2]?.id}
-                  color={evolColor}
+                  color={evolColor[2]}
                 />
               ) : (
                 ""

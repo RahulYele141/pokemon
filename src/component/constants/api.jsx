@@ -90,7 +90,6 @@ export const fetchPokemonDesc = async () => {
 };
 
 export const fetchPokemonEvolution = async (id) => {
-  console.log(id);
   const response = await fetch(`${API_SPEC}${id}`).then((response) =>
     response.json()
   );

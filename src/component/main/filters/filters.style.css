@@ -31,6 +31,7 @@
   text-align: start;
   color: #2e3156;
   font-weight: bold;
+  cursor: pointer;
   padding: 18px;
   margin: 18px;
   flex: 180px;
@@ -59,6 +60,7 @@
   flex: 180px;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .stats {
