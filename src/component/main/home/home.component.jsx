@@ -100,6 +100,12 @@ const Home = () => {
     setSearchField();
   };
 
+  const resetStats = () => {
+    console.log(pokemons);
+    setFilteredPokemons(pokemons);
+    setSearchField();
+  };
+
   const getDesc = () => {
     let newArr = [];
     descriptionAll.map((des) => {
@@ -201,6 +207,7 @@ const Home = () => {
         <Filters
           filterByType={filterByType}
           filterByStats={filterByStats}
+          resetStats={resetStats}
           types={pokemonTypes}
           stats={stats}
           searchPokemon={serachPokemon}

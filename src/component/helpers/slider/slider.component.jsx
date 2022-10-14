@@ -6,7 +6,13 @@ const capitalize = (s) => {
   return s[0].toUpperCase() + s.slice(1);
 };
 
-const StatsModal = ({ records, handleClose, open, filterByStats }) => {
+const StatsModal = ({
+  records,
+  handleClose,
+  open,
+  filterByStats,
+  resetStats,
+}) => {
   const [statVals, setStatValues] = useState([]);
 
   useEffect(() => {
@@ -61,7 +67,17 @@ const StatsModal = ({ records, handleClose, open, filterByStats }) => {
           );
         })}
         <div className="buttons">
-          <button className="reset" onClick={() => {}}>
+          <button
+            className="reset"
+            onClick={() => {
+              setStatValues(
+                records.map((record) => {
+                  return { key: record, value: [0, 210] };
+                })
+              );
+              resetStats();
+            }}
+          >
             Reset
           </button>
           <button className="apply" onClick={() => filterByStats(statVals)}>
