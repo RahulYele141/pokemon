@@ -103,11 +103,13 @@ const InfoModal = ({
                       height: "40px",
                       width: "40px",
                       display: "inline",
+                      cursor: "pointer",
                       padding: "2px",
                       margin: "4px",
                       border: "1px solid black",
                       borderRadius: "50%",
                     }}
+                    onClick={(e) => handleClose(e)}
                   >
                     &#10539;
                   </h2>
@@ -132,7 +134,8 @@ const InfoModal = ({
                 <p style={{ margin: "0", display: "inline" }}>
                   {description[infoModalPokemon?.id - 1]
                     ?.slice(0, 4)
-                    .join("\f")}
+                    .join("\f")
+                    .replace("\f", " ")}
                 </p>
                 <p
                   style={{
@@ -144,7 +147,8 @@ const InfoModal = ({
                     <DescPopover
                       description={description[infoModalPokemon?.id - 1]
                         ?.slice(0, 10)
-                        .join()}
+                        .join("\f")
+                        .replace("\f", "")}
                     ></DescPopover>
                   </u>
                 </p>
