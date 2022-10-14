@@ -18,7 +18,9 @@ const Card = ({ img, pokemon, index, color, openModal }) => {
       </div>
       <div className="cardItems">
         <h3>{pokemon?.toUpperCase()}</h3>
-        <p>{("00" + index).slice(-3)}</p>
+        <p style={{ fontWeight: "500", fontSize: "18px" }}>
+          {("00" + index).slice(-3)}
+        </p>
       </div>
     </div>
   );

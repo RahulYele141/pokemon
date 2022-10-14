@@ -35,7 +35,6 @@ const Home = () => {
       const { types, values } = await fetchPokemonTypes();
       const stats = await fetchPokemonStats();
       const desc = await fetchPokemonDesc();
-      //  const evolve = await fetchPokemonEvolution();
       setDescriptionAll(desc);
       setStats(stats);
       setPokemons(response);
@@ -59,6 +58,7 @@ const Home = () => {
       setSearchField("");
     }
   };
+
   const filterByType = (e) => {
     const val = e.target.labels[0].innerText.toLocaleLowerCase();
     let selectedTypes = [];
@@ -99,6 +99,7 @@ const Home = () => {
     setFilteredPokemons(filtered);
     setSearchField();
   };
+
   const getDesc = () => {
     let newArr = [];
     descriptionAll.map((des) => {
@@ -147,6 +148,7 @@ const Home = () => {
 
     handleOpen();
   };
+
   const prevPokemon = async (e) => {
     if (currentId === 1) {
       setInfoModalPokemon(pokemons[0]);
@@ -167,6 +169,29 @@ const Home = () => {
     }
   };
 
+  const color = (pokemon) => {
+    const pokemonKindList = pokemon?.types;
+    const pokemonKindName1 = pokemonKindList[0]?.type?.name;
+    const pokemonKindName2 = pokemonKindList[1]?.type?.name;
+
+    const pokemonTypes = types.filter((type) => {
+      const isTypeExist =
+        type.hasOwnProperty(pokemonKindName1) ||
+        type.hasOwnProperty(pokemonKindName2);
+      return isTypeExist;
+    });
+    const color1 = pokemonTypes.find((color) => {
+      return color[pokemonKindName1];
+    });
+    const color2 = pokemonTypes.find((color) => {
+      return color[pokemonKindName2] || color[pokemonKindName1];
+    });
+
+    return !color2[pokemonKindName1]
+      ? `${`linear-gradient(${color1[pokemonKindName1]}, ${color2[pokemonKindName2]})`}`
+      : `${`linear-gradient(${color1[pokemonKindName1]}, ${color1[pokemonKindName1]})`}`;
+  };
+
   return (
     <div>
       <div>
@@ -184,38 +209,12 @@ const Home = () => {
       <div className="home">
         {filteredPokemons.length === 0 || searchField === ""
           ? pokemons.map((pokemon, key) => {
-              const pokemonKindList = pokemon?.types;
-              const pokemonKindName1 = pokemonKindList[0]?.type?.name;
-              const pokemonKindName2 = pokemonKindList[1]?.type?.name;
-
-              const pokemonTypes = types.filter((type) => {
-                const isTypeExist =
-                  type.hasOwnProperty(pokemonKindName1) ||
-                  type.hasOwnProperty(pokemonKindName2);
-                return isTypeExist;
-              });
-              // console.log(pokemonTypes);
-              const color1 = pokemonTypes.find((color) => {
-                return color[pokemonKindName1];
-              });
-              const color2 = pokemonTypes.find((color) => {
-                return color[pokemonKindName2] || color[pokemonKindName1];
-              });
-
-              const colorFinal = () => {
-                if (!color2[pokemonKindName1]) {
-                  return `${`linear-gradient(${color1[pokemonKindName1]}, ${color2[pokemonKindName2]})`}`;
-                } else {
-                  return `${`linear-gradient(${color1[pokemonKindName1]}, ${color1[pokemonKindName1]})`}`;
-                }
-              };
-
-              console.log(colorFinal());
+              console.log(color(pokemon));
               return (
                 <div className="cards" key={key}>
                   <Card
                     openModal={openModal}
-                    color={colorFinal()}
+                    color={color(pokemon)}
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
                     index={pokemon.id}
@@ -224,22 +223,11 @@ const Home = () => {
               );
             })
           : filteredPokemons.map((pokemon, key) => {
-              const pokemonKindList = pokemon.types.slice(0, 1);
-              const pokemonKindName1 = pokemonKindList[0]?.type?.name;
-
-              const pokemonTypes = types.filter((type) => {
-                const isTypeExist = type.hasOwnProperty(pokemonKindName1);
-                return isTypeExist;
-              });
-
-              const color1 = pokemonTypes[0][pokemonKindName1];
-
               return (
                 <div className="cards" key={key}>
                   <Card
                     openModal={openModal}
-                    color1={`${color1}`}
-                    color2={`${color1}`}
+                    color={color(pokemon)}
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
                     index={pokemon.id}
@@ -252,6 +240,7 @@ const Home = () => {
           description={description}
           handleClose={handleClose}
           open={openInfoModal}
+          color={color}
           infoModalPokemon={infoModalPokemon}
           prevPokemon={prevPokemon}
           nextPokemon={nextPokemon}

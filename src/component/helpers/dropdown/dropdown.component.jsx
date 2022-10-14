@@ -16,15 +16,10 @@ const Dropdown = ({ handleClose, open, records, onHandleChange }) => {
       <Box className="type-modal">
         {records.map((record, key) => {
           return (
-            <div
-              type="checkbox"
-              style={{ display: "flex", flexDirection: "row" }}
-              key={key}
-              value={record}
-            >
-              <label>
+            <div className="type-modal_item" key={key} value={record}>
+              <label className="type-modal_label">
                 <input type="checkbox" onChange={onHandleChange}></input>
-                {capitalize(record)}
+                <p>{capitalize(record)}</p>
               </label>
             </div>
           );

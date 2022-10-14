@@ -2,6 +2,7 @@ const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
 const API_TYPES = "https://pokeapi.co/api/v2/type";
 const API_STATS = "https://pokeapi.co/api/v2/stat";
 const API_SPEC = "https://pokeapi.co/api/v2/pokemon-species/";
+const numberOfPokemon = 24;
 
 const colors = [
   "#DDCBD0",
@@ -27,8 +28,8 @@ const colors = [
 ];
 
 export const fetchPokemonData = async () => {
-  const response = await fetch(`${API_POKEMON}?limit=18`).then((response) =>
-    response.json()
+  const response = await fetch(`${API_POKEMON}?limit=${numberOfPokemon}`).then(
+    (response) => response.json()
   );
   const json = await response.results;
 
@@ -73,8 +74,8 @@ export const fetchPokemonStats = async () => {
 };
 
 export const fetchPokemonDesc = async () => {
-  const response = await fetch(`${API_SPEC}?limit=18`).then((response) =>
-    response.json()
+  const response = await fetch(`${API_SPEC}?limit=${numberOfPokemon}`).then(
+    (response) => response.json()
   );
   const json = await response.results;
 

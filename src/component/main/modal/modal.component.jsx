@@ -11,7 +11,9 @@ const InfoModal = ({
   prevPokemon,
   nextPokemon,
   evolPokemons,
+  color,
 }) => {
+  console.log(infoModalPokemon);
   return (
     <Modal
       keepMounted
@@ -208,19 +210,30 @@ const InfoModal = ({
                 img={`${evolPokemons[0]?.sprites.other.dream_world.front_default}`}
                 pokemon={evolPokemons[0]?.name}
                 index={evolPokemons[0]?.id}
+                color={() => color(evolPokemons[0])}
               />
               <h2 className="evolution-chain_arrow">&#8594;</h2>
               <Card
                 img={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
                 pokemon={evolPokemons[1]?.name}
                 index={evolPokemons[1]?.id}
+                color={() => color(evolPokemons[1])}
               />
-              <h2 className="evolution-chain_arrow">&#8594;</h2>
-              <Card
-                img={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
-                pokemon={evolPokemons[2]?.name}
-                index={evolPokemons[2]?.id}
-              />
+              {evolPokemons[2] ? (
+                <h2 className="evolution-chain_arrow">&#8594;</h2>
+              ) : (
+                ""
+              )}
+              {evolPokemons[2] ? (
+                <Card
+                  img={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
+                  pokemon={evolPokemons[2]?.name}
+                  index={evolPokemons[2]?.id}
+                  color={() => color(evolPokemons[2])}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
