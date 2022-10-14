@@ -11,9 +11,46 @@ const InfoModal = ({
   prevPokemon,
   nextPokemon,
   evolPokemons,
-  color,
+  evolColor,
 }) => {
-  console.log(infoModalPokemon);
+  const progressBar = (name, value) => {
+    return (
+      <div
+        style={{ display: "flex", flexDirection: "row", placeItems: "center" }}
+      >
+        <label>{`${name}`.toUpperCase()}</label>
+        <div
+          style={{
+            display: "flex",
+            height: 20,
+            width: "160px",
+            backgroundColor: " #93b2b2",
+            borderRadius: 0,
+            margin: 10,
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              width: `${value}%`,
+              backgroundColor: "#2e3156",
+              borderRadius: "inherit",
+              textAlign: "right",
+              textAlignLast: "justify",
+            }}
+          >
+            <span
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 10,
+              }}
+            >{`${value}`}</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <Modal
@@ -25,13 +62,7 @@ const InfoModal = ({
       <Box className="info-modal">
         <div className="info-modal_root">
           <div className="info-modal_image_header">
-            <div
-              className="info-image_card"
-              style={{
-                color,
-              }}
-              a
-            >
+            <div className="info-image_card">
               <img
                 src={`${infoModalPokemon?.sprites.other.dream_world.front_default}`}
                 alt={"pokemon"}
@@ -55,22 +86,42 @@ const InfoModal = ({
                   <h2
                     onClick={(e) => prevPokemon(e)}
                     style={{
+                      height: "40px",
+                      width: "40px",
                       cursor: "pointer",
                       display: "inline",
                       padding: "2px",
+                      margin: "4px",
+                      border: "1px solid black",
+                      borderRadius: "50%",
                     }}
                   >
                     &#8592;
                   </h2>
-                  <h2 style={{ display: "inline", padding: "2px" }}>
+                  <h2
+                    style={{
+                      height: "40px",
+                      width: "40px",
+                      display: "inline",
+                      padding: "2px",
+                      margin: "4px",
+                      border: "1px solid black",
+                      borderRadius: "50%",
+                    }}
+                  >
                     &#10539;
                   </h2>
                   <h2
                     onClick={(e) => nextPokemon(e)}
                     style={{
+                      height: "40px",
+                      width: "40px",
                       cursor: "pointer",
                       display: "inline",
                       padding: "2px",
+                      margin: "4px",
+                      border: "1px solid black",
+                      borderRadius: "50%",
                     }}
                   >
                     &#8594;
@@ -82,7 +133,6 @@ const InfoModal = ({
                   {description[infoModalPokemon?.id - 1]
                     ?.slice(0, 4)
                     .join("\f")}
-                  ...
                 </p>
                 <p
                   style={{
@@ -142,60 +192,40 @@ const InfoModal = ({
             <h3>Stats</h3>
             <div className="stats-list">
               <div className="stats-progress">
-                <label>
-                  {`${infoModalPokemon?.stats[0].stat.name}`.toUpperCase()}
-                </label>
-                <progress
-                  value={infoModalPokemon?.stats[0].base_stat}
-                  max="100"
-                ></progress>
+                {progressBar(
+                  infoModalPokemon?.stats[0].stat.name,
+                  infoModalPokemon?.stats[0].base_stat
+                )}
               </div>
               <div className="stats-progress">
-                <label>
-                  {`${infoModalPokemon?.stats[2].stat.name}`.toUpperCase()}
-                </label>
-                <progress
-                  value={infoModalPokemon?.stats[2].base_stat}
-                  max="100"
-                >
-                  {infoModalPokemon?.stats[2].base_stat}
-                </progress>
+                {progressBar(
+                  infoModalPokemon?.stats[2].stat.name,
+                  infoModalPokemon?.stats[2].base_stat
+                )}
               </div>
               <div className="stats-progress">
-                <label>
-                  {`${infoModalPokemon?.stats[4].stat.name}`.toUpperCase()}
-                </label>
-                <progress
-                  value={infoModalPokemon?.stats[4].base_stat}
-                  max="100"
-                ></progress>
+                {progressBar(
+                  infoModalPokemon?.stats[4].stat.name,
+                  infoModalPokemon?.stats[4].base_stat
+                )}
               </div>
               <div className="stats-progress">
-                <label>
-                  {`${infoModalPokemon?.stats[1].stat.name}`.toUpperCase()}
-                </label>
-                <progress
-                  value={infoModalPokemon?.stats[1].base_stat}
-                  max="100"
-                ></progress>
+                {progressBar(
+                  infoModalPokemon?.stats[1].stat.name,
+                  infoModalPokemon?.stats[1].base_stat
+                )}
               </div>
               <div className="stats-progress">
-                <label>
-                  {`${infoModalPokemon?.stats[3].stat.name}`.toUpperCase()}
-                </label>
-                <progress
-                  value={infoModalPokemon?.stats[3].base_stat}
-                  max="100"
-                ></progress>
+                {progressBar(
+                  infoModalPokemon?.stats[3].stat.name,
+                  infoModalPokemon?.stats[3].base_stat
+                )}
               </div>
               <div className="stats-progress">
-                <label>
-                  {`${infoModalPokemon?.stats[5].stat.name}`.toUpperCase()}
-                </label>
-                <progress
-                  value={infoModalPokemon?.stats[5].base_stat}
-                  max="100"
-                ></progress>
+                {progressBar(
+                  infoModalPokemon?.stats[5].stat.name,
+                  infoModalPokemon?.stats[5].base_stat
+                )}
               </div>
             </div>
           </div>
@@ -209,7 +239,7 @@ const InfoModal = ({
                   img={`${evolPokemons[0]?.sprites.other.dream_world.front_default}`}
                   pokemon={evolPokemons[0]?.name}
                   index={evolPokemons[0]?.id}
-                  color={() => color(evolPokemons[0])}
+                  color={evolColor}
                 />
               ) : (
                 ""
@@ -223,7 +253,7 @@ const InfoModal = ({
                 img={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
                 pokemon={evolPokemons[1]?.name}
                 index={evolPokemons[1]?.id}
-                color={() => color(evolPokemons[1])}
+                color={evolColor}
               />
               {evolPokemons[2] ? (
                 <h2 className="evolution-chain_arrow">&#8594;</h2>
@@ -235,7 +265,7 @@ const InfoModal = ({
                   img={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
                   pokemon={evolPokemons[2]?.name}
                   index={evolPokemons[2]?.id}
-                  color={() => color(evolPokemons[2])}
+                  color={evolColor}
                 />
               ) : (
                 ""

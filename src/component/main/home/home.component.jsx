@@ -26,6 +26,7 @@ const Home = () => {
   const [description, setDescription] = useState([]);
   const [currentId, setCurrentId] = useState();
   const [evolPokemons, setEvolPokemons] = useState([]);
+  const [evolColor, setEvolColor] = useState();
 
   const handleOpen = () => setOpenInfoModal(!openInfoModal);
   const handleClose = () => setOpenInfoModal(false);
@@ -83,16 +84,15 @@ const Home = () => {
 
   const filterByStats = (values) => {
     let filtered = [];
+
     pokemons.forEach((pk, index) => {
-      values.filter((val) => {
+      values.map((val) => {
         if (
           pk.stats[index]?.base_stat > val.value[0] &&
           pk.stats[index]?.base_stat < val.value[1]
         ) {
           const data = filtered.filter((p) => p.name.includes(pk.name));
-          if (!data.length) {
-            filtered.push(pk);
-          }
+          if (!data.length) filtered.push(pk);
         }
       });
     });
@@ -101,7 +101,6 @@ const Home = () => {
   };
 
   const resetStats = () => {
-    console.log(pokemons);
     setFilteredPokemons(pokemons);
     setSearchField();
   };
@@ -149,18 +148,18 @@ const Home = () => {
     const thirdPokemon = pokemons.find((pk) => {
       return pk.name === thirdSpec;
     });
-
+    const evol = color(infoModalPokemon);
+    setEvolColor(evol);
     setEvolPokemons([firstPokemon, secondPokemon, thirdPokemon]);
 
     handleOpen();
   };
-
   const prevPokemon = async (e) => {
     if (currentId === 1) {
       setInfoModalPokemon(pokemons[0]);
     } else {
       setCurrentId(currentId - 1);
-      setInfoModalPokemon(pokemons[currentId]);
+      setInfoModalPokemon(pokemons[currentId - 1]);
     }
   };
 
@@ -205,18 +204,17 @@ const Home = () => {
       </div>
       <div>
         <Filters
+          searchPokemon={serachPokemon}
+          types={pokemonTypes}
+          stats={stats}
           filterByType={filterByType}
           filterByStats={filterByStats}
           resetStats={resetStats}
-          types={pokemonTypes}
-          stats={stats}
-          searchPokemon={serachPokemon}
         ></Filters>
       </div>
       <div className="home">
         {filteredPokemons.length === 0 || searchField === ""
           ? pokemons.map((pokemon, key) => {
-              console.log(color(pokemon));
               return (
                 <div className="cards" key={key}>
                   <Card
@@ -247,11 +245,11 @@ const Home = () => {
           description={description}
           handleClose={handleClose}
           open={openInfoModal}
-          color={color}
           infoModalPokemon={infoModalPokemon}
           prevPokemon={prevPokemon}
           nextPokemon={nextPokemon}
           evolPokemons={evolPokemons}
+          evolColor={evolColor}
         />
       </div>
     </div>

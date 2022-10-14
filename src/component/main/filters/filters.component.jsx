@@ -10,7 +10,6 @@ const Filters = ({
   filterByType,
   filterByStats,
   resetStats,
-  value,
 }) => {
   const [open, setOpen] = useState(false);
   const [slider, setSlider] = useState(false);
@@ -70,12 +69,11 @@ const Filters = ({
           Stats
         </button>
         <StatsModal
-          value={value}
+          records={stats}
+          handleClose={closeSlider}
+          open={slider}
           filterByStats={filterByStats}
           resetStats={resetStats}
-          records={stats}
-          open={slider}
-          handleClose={closeSlider}
         />
       </div>
     </div>

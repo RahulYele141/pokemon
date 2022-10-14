@@ -30,9 +30,10 @@
 .slider {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex: 70%;
-  margin: 3px;
-  padding: 2px;
+  margin: 4px;
+  padding: 5px;
   align-items: flex-end;
   border: 1px solid black;
   border-radius: 5px;
