@@ -13,7 +13,6 @@ const InfoModal = ({
   evolPokemons,
   evolColor,
 }) => {
-  console.log(evolColor);
   const progressBar = (name, value) => {
     return (
       <div
@@ -44,7 +43,7 @@ const InfoModal = ({
               style={{
                 color: "white",
                 fontWeight: "bold",
-                fontSize: 10,
+                fontSize: 15,
               }}
             >{`${value}`}</span>
           </div>
@@ -68,6 +67,7 @@ const InfoModal = ({
                 src={`${infoModalPokemon?.sprites.other.dream_world.front_default}`}
                 alt={"pokemon"}
                 className="image"
+                style={{ height: "240px", width: "120px" }}
               />
             </div>
             <div className="info-modal_para_header">
@@ -135,8 +135,8 @@ const InfoModal = ({
                 <p style={{ margin: "0", display: "inline" }}>
                   {description[infoModalPokemon?.id - 1]
                     ?.slice(0, 4)
-                    .join("\f")
-                    .replace("\f", " ")}
+                    .join("")
+                    .replace(/[^a-zA-Z ]/g, "")}
                 </p>
                 <p
                   style={{
@@ -148,8 +148,8 @@ const InfoModal = ({
                     <DescPopover
                       description={description[infoModalPokemon?.id - 1]
                         ?.slice(0, 10)
-                        .join("\f")
-                        .replace("\f", "")}
+                        .join("")
+                        .replace(/[^a-zA-Z ]/g, " ")}
                     ></DescPopover>
                   </u>
                 </p>
@@ -182,7 +182,7 @@ const InfoModal = ({
                 </p>
               </div>
               <div className="info-modal_details_content">
-                <h4>Types</h4>{" "}
+                <h4>Types</h4>
                 <p>
                   {infoModalPokemon?.types[0]?.type.name},{" "}
                   {infoModalPokemon?.types[1]?.type.name}

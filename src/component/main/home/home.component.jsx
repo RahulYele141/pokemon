@@ -27,9 +27,9 @@ const Home = () => {
   const [currentId, setCurrentId] = useState();
   const [evolPokemons, setEvolPokemons] = useState([]);
   const [evolColor, setEvolColor] = useState([]);
-
   const handleOpen = () => setOpenInfoModal(!openInfoModal);
   const handleClose = () => setOpenInfoModal(false);
+
   useEffect(() => {
     async function getData() {
       const response = await fetchPokemonData();
@@ -83,20 +83,32 @@ const Home = () => {
   };
 
   const filterByStats = (values) => {
-    let filtered = [];
-    let data = [];
+    // console.log(values, pokemons);
 
-    pokemons.map((pk, index) => {
-      values.filter((val) => {
-        if (
-          pk.stats[index]?.base_stat > val.value[0] &&
-          pk.stats[index]?.base_stat < val.value[1]
-        ) {
-          data = filtered.filter((p) => p.name.includes(pk.name));
-          if (!data.length) filtered.push(pk);
+    let filtered = [];
+    pokemons.forEach((pokemon, index) => {
+      var pushed = false;
+      values.forEach((funnel, ind) => {
+        if (!pushed) {
+          const state = pokemon.stats.filter(
+            (st) => st.stat.name === funnel.key
+          );
+          if (
+            state.length &&
+            state[0].base_stat > funnel.value[0] &&
+            state[0].base_stat < funnel.value[1]
+          ) {
+            console.log("FUNNEL", pokemon, state);
+            pushed = true;
+            filtered.push(pokemon);
+          }
         }
       });
     });
+    const ids = filtered.map((o) => o.id);
+    filtered = filtered.filter(({ id }, index) => !ids.includes(id, index + 1));
+    console.log("FUNNEL RESULT", filtered);
+
     setFilteredPokemons(filtered);
     setSearchField();
   };
@@ -125,7 +137,31 @@ const Home = () => {
     setDescription(newArr);
   };
 
+  const color = (pokemon) => {
+    const pokemonKindList = pokemon?.types;
+    const pokemonKindName1 = pokemonKindList[0]?.type?.name;
+    const pokemonKindName2 = pokemonKindList[1]?.type?.name;
+
+    const pokemonTypes = types.filter((type) => {
+      const isTypeExist =
+        type.hasOwnProperty(pokemonKindName1) ||
+        type.hasOwnProperty(pokemonKindName2);
+      return isTypeExist;
+    });
+    const color1 = pokemonTypes.find((color) => {
+      return color[pokemonKindName1];
+    });
+    const color2 = pokemonTypes.find((color) => {
+      return color[pokemonKindName2] || color[pokemonKindName1];
+    });
+
+    return !color2[pokemonKindName1]
+      ? `${`linear-gradient(${color1[pokemonKindName1]}, ${color2[pokemonKindName2]})`}`
+      : `${`linear-gradient(${color1[pokemonKindName1]}, ${color1[pokemonKindName1]})`}`;
+  };
+
   const openModal = async (e, id) => {
+    console.log(id);
     await getDesc();
 
     await setInfoModalPokemon(
@@ -152,11 +188,13 @@ const Home = () => {
     const evol1 = color(firstPokemon);
     const evol2 = color(secondPokemon);
     const evol3 = color(thirdPokemon);
+
     setEvolColor([evol1, evol2, evol3]);
     setEvolPokemons([firstPokemon, secondPokemon, thirdPokemon]);
 
     handleOpen();
   };
+
   const prevPokemon = async (e) => {
     if (currentId === 1) {
       setInfoModalPokemon(pokemons[0]);
@@ -175,29 +213,6 @@ const Home = () => {
       setCurrentId(currentId + 1);
       setInfoModalPokemon(pokemons[currentId]);
     }
-  };
-
-  const color = (pokemon) => {
-    const pokemonKindList = pokemon?.types;
-    const pokemonKindName1 = pokemonKindList[0]?.type?.name;
-    const pokemonKindName2 = pokemonKindList[1]?.type?.name;
-
-    const pokemonTypes = types.filter((type) => {
-      const isTypeExist =
-        type.hasOwnProperty(pokemonKindName1) ||
-        type.hasOwnProperty(pokemonKindName2);
-      return isTypeExist;
-    });
-    const color1 = pokemonTypes.find((color) => {
-      return color[pokemonKindName1];
-    });
-    const color2 = pokemonTypes.find((color) => {
-      return color[pokemonKindName2] || color[pokemonKindName1];
-    });
-
-    return !color2[pokemonKindName1]
-      ? `${`linear-gradient(${color1[pokemonKindName1]}, ${color2[pokemonKindName2]})`}`
-      : `${`linear-gradient(${color1[pokemonKindName1]}, ${color1[pokemonKindName1]})`}`;
   };
 
   return (

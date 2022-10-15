@@ -2,7 +2,7 @@ const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
 const API_TYPES = "https://pokeapi.co/api/v2/type";
 const API_STATS = "https://pokeapi.co/api/v2/stat";
 const API_SPEC = "https://pokeapi.co/api/v2/pokemon-species/";
-const numberOfPokemon = 24;
+const numberOfPokemon = 18;
 
 const colors = [
   "#DDCBD0",

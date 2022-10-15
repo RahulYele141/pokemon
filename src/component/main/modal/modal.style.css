@@ -100,7 +100,7 @@
 .info-modal_details_content {
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: 0 40px 0 40px;
 }
 
 .stats-row {

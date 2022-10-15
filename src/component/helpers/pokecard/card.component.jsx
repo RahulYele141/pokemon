@@ -3,10 +3,6 @@ import React from "react";
 import "./card.style.css";
 
 const Card = ({ img, pokemon, index, color, openModal }) => {
-  function capitalize(s) {
-    return s[0].toUpperCase() + s.slice(1);
-  }
-  // console.log(color);
   return (
     <div
       onClick={(e) => openModal(e, index)}
