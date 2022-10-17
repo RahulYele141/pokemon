@@ -71,6 +71,8 @@
   height: 40px;
 }
 .info-modal_header_buttons {
+  display: flex;
+  flex-direction: row;
   align-self: center;
   padding: 2px;
   margin: 2px;

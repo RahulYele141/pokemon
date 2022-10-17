@@ -284,6 +284,7 @@ const Home = () => {
           nextPokemon={nextPokemon}
           evolPokemons={evolPokemons}
           evolColor={evolColor}
+          windowSize={windowSize}
         />
       </div>
     </div>

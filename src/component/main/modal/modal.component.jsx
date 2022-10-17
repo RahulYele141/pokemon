@@ -1,4 +1,7 @@
 import { Box, Modal } from "@mui/material";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import DescPopover from "../../helpers/descPopover/descPopover.component";
 import Card from "../../helpers/pokecard/card.component";
 import "./modal.style.css";
@@ -12,6 +15,7 @@ const InfoModal = ({
   nextPokemon,
   evolPokemons,
   evolColor,
+  windowSize,
 }) => {
   const progressBar = (name, value) => {
     return (
@@ -67,7 +71,6 @@ const InfoModal = ({
                 src={`${infoModalPokemon?.sprites.other.dream_world.front_default}`}
                 alt={"pokemon"}
                 className="image"
-                style={{ height: "240px", width: "120px" }}
               />
             </div>
             <div className="info-modal_para_header">
@@ -84,51 +87,34 @@ const InfoModal = ({
                   className="info-modal_header_buttons"
                   style={{ width: "80px" }}
                 >
-                  <h2
+                  <ArrowCircleLeftOutlinedIcon
                     onClick={(e) => prevPokemon(e)}
                     style={{
-                      height: "40px",
-                      width: "40px",
                       cursor: "pointer",
-                      display: "inline",
+                      display: "flex",
                       padding: "2px",
                       margin: "4px",
-                      border: "1px solid black",
-                      borderRadius: "50%",
                     }}
-                  >
-                    &#8592;
-                  </h2>
-                  <h2
+                  />
+
+                  <CancelOutlinedIcon
                     style={{
-                      height: "40px",
-                      width: "40px",
                       display: "inline",
-                      cursor: "pointer",
+                      cursor: "flex",
                       padding: "2px",
                       margin: "4px",
-                      border: "1px solid black",
-                      borderRadius: "50%",
                     }}
                     onClick={(e) => handleClose(e)}
-                  >
-                    &#10539;
-                  </h2>
-                  <h2
+                  />
+                  <ArrowCircleRightOutlinedIcon
                     onClick={(e) => nextPokemon(e)}
                     style={{
-                      height: "40px",
-                      width: "40px",
                       cursor: "pointer",
-                      display: "inline",
+                      display: "flex",
                       padding: "2px",
                       margin: "4px",
-                      border: "1px solid black",
-                      borderRadius: "50%",
                     }}
-                  >
-                    &#8594;
-                  </h2>
+                  />
                 </div>
               </div>
               <div className="info-modal_para">

@@ -8,17 +8,21 @@ const Header = ({ windowSize }) => {
       <div
         className="header"
         style={
-          windowSize < 800
-            ? { display: "flex", flexDirection: "column" }
+          windowSize < 600
+            ? {
+                display: "flex",
+                flexDirection: "column",
+                marginInlineStart: "auto",
+              }
             : { display: "flex", flexDirection: "row" }
         }
       >
         <h1 className="logo">Pokédex</h1>
-        {windowSize < 800 ? (
+        {windowSize < 600 ? (
           <hr
             style={{
               border: "2px solid #70728d",
-              width: `${windowSize - 100}px`,
+              width: `${windowSize - 80}px`,
             }}
           ></hr>
         ) : (
