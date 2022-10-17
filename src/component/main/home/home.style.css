@@ -20,10 +20,10 @@
 
 .home-mobile {
   display: grid;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: center;
   grid-template-columns: 1fr 1fr;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   margin: 4px;
   padding: 10px;
 }

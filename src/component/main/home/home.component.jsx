@@ -241,12 +241,12 @@ const Home = () => {
           toggleNav={toggleNav}
         ></Filters>
       </div>
-      <div className={windowSize > 800 ? "home" : "home-mobile"}>
+      <div className={windowSize > 600 ? "home" : "home-mobile"}>
         {filteredPokemons.length === 0 || searchField === ""
           ? pokemons.map((pokemon, key) => {
               return (
                 <div
-                  className={windowSize > 800 ? "cards" : "cards-mobile"}
+                  className={windowSize > 600 ? "cards" : "cards-mobile"}
                   key={key}
                 >
                   <Card
@@ -255,6 +255,7 @@ const Home = () => {
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
                     index={pokemon.id}
+                    windowSize={windowSize}
                   ></Card>
                 </div>
               );
@@ -268,6 +269,7 @@ const Home = () => {
                     img={`${pokemon.sprites.other.dream_world.front_default}`}
                     pokemon={pokemon.name}
                     index={pokemon.id}
+                    windowSize={windowSize}
                   ></Card>
                 </div>
               );
