@@ -33,7 +33,7 @@ const Filters = ({
         <input
           type="search"
           onChange={(e) => searchPokemon(e)}
-          className={windowSize > 800 ? "search" : "search-mobile"}
+          className={windowSize > 600 ? "search" : "search-mobile"}
           placeholder="Name or Number"
         ></input>
 
@@ -42,7 +42,7 @@ const Filters = ({
           name="Normal"
           value="Types"
           type="button"
-          className={windowSize > 800 ? "type-button" : "type-button-mobile"}
+          className={windowSize > 600 ? "type-button" : "type-button-mobile"}
           onClick={() => handleOpen()}
           style={
             open ? { backgroundColor: "white" } : { backgroundColor: "#c9dde2" }
@@ -58,7 +58,7 @@ const Filters = ({
         />
 
         {/* gender */}
-        <select className={windowSize > 800 ? "gender" : "gender-mobile"}>
+        <select className={windowSize > 600 ? "gender" : "gender-mobile"}>
           <option value="">Male</option>
           <option value="">Female</option>
           <option value="">Genderless</option>
@@ -68,7 +68,7 @@ const Filters = ({
           name="Normal"
           value="Stats"
           type="button"
-          className={windowSize > 800 ? "stats-button" : "stats-button-mobile"}
+          className={windowSize > 600 ? "stats-button" : "stats-button-mobile"}
           onClick={() => openSlider()}
           style={
             slider
@@ -88,7 +88,7 @@ const Filters = ({
         {/* toggle button */}
         <div
           className={
-            windowSize > 800 ? "filters-button" : "filters-button-mobile"
+            windowSize > 600 ? "filters-button" : "filters-button-mobile"
           }
           onClick={() => openResponsiveModal()}
         >
@@ -99,9 +99,10 @@ const Filters = ({
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
+            position: "relative",
           }}
         >
-          {windowSize < 800 && (
+          {windowSize < 600 && (
             <ResponsiveModal
               windowSize={windowSize}
               open={open}

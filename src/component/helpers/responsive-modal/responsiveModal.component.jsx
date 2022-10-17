@@ -6,10 +6,9 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import React, { useEffect, useState } from "react";
 import "./responsiveModal.style.css";
-import { Box } from "@mui/system";
 
 const ResponsiveModal = ({
   types,
@@ -17,14 +16,15 @@ const ResponsiveModal = ({
   stats,
   filterByStats,
   resetStats,
-  openTypesAccord,
-  updateVal,
-  openStatAccord,
   openResponsive,
   handleCloseResponsive,
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [statVals, setStatValues] = useState([]);
+
+  const capitalize = (s) => {
+    return s[0].toUpperCase() + s.slice(1);
+  };
 
   useEffect(() => {
     if (stats && statVals.length === 0) {
@@ -35,6 +35,11 @@ const ResponsiveModal = ({
       );
     }
   }, [stats, statVals.length]);
+
+  const updateVal = (values, index) => {
+    statVals[index].value = values;
+    setStatValues([...statVals]);
+  };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -53,13 +58,21 @@ const ResponsiveModal = ({
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
+            sx={{ padding: "5px", margin: "5px", border: "1px solid black" }}
           >
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
+              expandIcon={<AddCircleOutlineIcon />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"
             >
-              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              <Typography
+                sx={{
+                  width: "33%",
+                  flexShrink: 0,
+                  color: "#2e3156",
+                  fontWeight: "bold",
+                }}
+              >
                 Types
               </Typography>
             </AccordionSummary>
@@ -71,7 +84,7 @@ const ResponsiveModal = ({
                     <div className="type-accord_item" key={key} value={record}>
                       <label className="type-accord_label">
                         <input type="checkbox" onChange={filterByType}></input>
-                        <p>{record}</p>
+                        <p>{capitalize(record)}</p>
                       </label>
                     </div>
                   );
@@ -80,23 +93,53 @@ const ResponsiveModal = ({
             </AccordionDetails>
           </Accordion>
 
-          {/* gender */}
-          <select className="gender-responsive">
-            <option value="">Male</option>
-            <option value="">Female</option>
-            <option value="">Genderless</option>
-          </select>
-          {/* stats */}
           <Accordion
             expanded={expanded === "panel2"}
             onChange={handleChange("panel2")}
+            sx={{ padding: "5px", margin: "5px", border: "1px solid black" }}
           >
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+              expandIcon={<AddCircleOutlineIcon />}
+              aria-controls="panel2bh-content"
+              id="panel2bh-header"
             >
-              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              <Typography
+                sx={{
+                  width: "33%",
+                  flexShrink: 0,
+                  color: "#2e3156",
+                  fontWeight: "bold",
+                }}
+              >
+                Gender
+              </Typography>
+            </AccordionSummary>
+            <select className="gender-responsive">
+              <option value="">Male</option>
+              <option value="">Female</option>
+              <option value="">Genderless</option>
+            </select>
+          </Accordion>
+
+          {/* stats */}
+          <Accordion
+            expanded={expanded === "panel3"}
+            onChange={handleChange("panel3")}
+            sx={{ padding: "5px", margin: "5px", border: "1px solid black" }}
+          >
+            <AccordionSummary
+              expandIcon={<AddCircleOutlineIcon />}
+              aria-controls="panel3bh-content"
+              id="panel3bh-header"
+            >
+              <Typography
+                sx={{
+                  width: "33%",
+                  flexShrink: 0,
+                  color: "#2e3156",
+                  fontWeight: "bold",
+                }}
+              >
                 Stats
               </Typography>
             </AccordionSummary>
@@ -108,16 +151,16 @@ const ResponsiveModal = ({
                     <div key={index}>
                       <div
                         className="accord-slider-component"
-                        style={{ display: "flex", flexDirection: "row" }}
+                        style={{ display: "flex", flexDirection: "column" }}
                         key={index}
                       >
                         <div className="accord-statName">{record.key}</div>
-                        <div className="slider">
+                        <div className="accord-slider">
                           <Slider
                             sx={{
                               display: "flex",
                               color: "#2E3156",
-                              width: "100px",
+                              width: "140px",
                             }}
                             valueLabelDisplay="auto"
                             value={record.value}

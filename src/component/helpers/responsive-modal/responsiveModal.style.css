@@ -2,14 +2,15 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow: hidden;
 }
 
 .responsive-modal {
   display: flex;
   background-color: white;
-  width: 280px;
+  width: 250px;
   min-height: 600px;
-  height: auto;
+  height: 90%;
   color: #2e3156;
   font-weight: 600;
   padding: 18px;
@@ -17,6 +18,7 @@
   flex-direction: column;
   border: 1px solid #2e3156;
   border-radius: 10px;
+  overflow: auto;
 }
 
 .type-button-responsive {
@@ -59,7 +61,14 @@
 .type-accord_items {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   grid-template-columns: 1fr 1fr;
+}
+
+.type-accord_label {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .type-accord_item {
@@ -69,7 +78,7 @@
 
 .accord-slider-component {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 3px;
   padding: 2px;
 }
