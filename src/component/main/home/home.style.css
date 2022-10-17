@@ -11,3 +11,15 @@
   justify-content: center;
   cursor: pointer;
 }
+
+.cards-mobile {
+  padding: 10px;
+  display: "flex";
+  justify-content: center;
+}
+
+.home-mobile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-evenly;
+}

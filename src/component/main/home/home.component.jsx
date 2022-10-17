@@ -27,8 +27,12 @@ const Home = () => {
   const [currentId, setCurrentId] = useState();
   const [evolPokemons, setEvolPokemons] = useState([]);
   const [evolColor, setEvolColor] = useState([]);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [toggleMenu, setToggleMenu] = useState(false);
+
   const handleOpen = () => setOpenInfoModal(!openInfoModal);
   const handleClose = () => setOpenInfoModal(false);
+  const toggleNav = () => setToggleMenu(!toggleMenu);
 
   useEffect(() => {
     async function getData() {
@@ -43,10 +47,18 @@ const Home = () => {
       setTypes(values);
     }
     getData();
-
     getDesc();
-  }, []);
 
+    const changeWidth = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener("resize", changeWidth);
+    return () => {
+      window.removeEventListener("resize", changeWidth);
+    };
+  }, []);
+  console.log(windowSize);
   const serachPokemon = (e) => {
     setSearchField(e.target.value);
     const filteredPokemons = pokemons.filter((pokemon) => {
@@ -83,12 +95,11 @@ const Home = () => {
   };
 
   const filterByStats = (values) => {
-    // console.log(values, pokemons);
-
     let filtered = [];
-    pokemons.forEach((pokemon, index) => {
+
+    pokemons.forEach((pokemon) => {
       var pushed = false;
-      values.forEach((funnel, ind) => {
+      values.forEach((funnel) => {
         if (!pushed) {
           const state = pokemon.stats.filter(
             (st) => st.stat.name === funnel.key
@@ -98,16 +109,15 @@ const Home = () => {
             state[0].base_stat > funnel.value[0] &&
             state[0].base_stat < funnel.value[1]
           ) {
-            console.log("FUNNEL", pokemon, state);
             pushed = true;
             filtered.push(pokemon);
           }
         }
       });
     });
+
     const ids = filtered.map((o) => o.id);
     filtered = filtered.filter(({ id }, index) => !ids.includes(id, index + 1));
-    console.log("FUNNEL RESULT", filtered);
 
     setFilteredPokemons(filtered);
     setSearchField();
@@ -161,7 +171,6 @@ const Home = () => {
   };
 
   const openModal = async (e, id) => {
-    console.log(id);
     await getDesc();
 
     await setInfoModalPokemon(
@@ -218,7 +227,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <Header></Header>
+        <Header windowSize={windowSize}></Header>
       </div>
       <div>
         <Filters
@@ -228,13 +237,18 @@ const Home = () => {
           filterByType={filterByType}
           filterByStats={filterByStats}
           resetStats={resetStats}
+          windowSize={windowSize}
+          toggleNav={toggleNav}
         ></Filters>
       </div>
-      <div className="home">
+      <div className={windowSize > 800 ? "home" : "home-mobile"}>
         {filteredPokemons.length === 0 || searchField === ""
           ? pokemons.map((pokemon, key) => {
               return (
-                <div className="cards" key={key}>
+                <div
+                  className={windowSize > 800 ? "cards" : "cards-mobile"}
+                  key={key}
+                >
                   <Card
                     openModal={openModal}
                     color={color(pokemon)}
