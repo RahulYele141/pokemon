@@ -9,7 +9,7 @@ const Card = ({ img, pokemon, index, color, openModal, windowSize }) => {
       className="card"
       style={{
         backgroundImage: `${color}`,
-        width: windowSize < 600 ? "100px" : "180px",
+        width: windowSize < 600 ? "120px" : "180px",
         height: windowSize < 600 ? "180px" : "270px",
       }}
     >
@@ -27,7 +27,7 @@ const Card = ({ img, pokemon, index, color, openModal, windowSize }) => {
         <h3
           style={{
             fontWeight: "bold",
-            fontSize: windowSize < 600 ? "15px" : "18px",
+            fontSize: windowSize < 600 ? "12px" : "18px",
           }}
         >
           {pokemon?.toUpperCase()}
@@ -35,7 +35,7 @@ const Card = ({ img, pokemon, index, color, openModal, windowSize }) => {
         <p
           style={{
             fontWeight: "500",
-            fontSize: windowSize < 600 ? "10px" : "18px",
+            fontSize: windowSize < 600 ? "8px" : "18px",
           }}
         >
           {("00" + index).slice(-3)}

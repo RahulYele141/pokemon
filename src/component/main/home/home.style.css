@@ -13,17 +13,14 @@
 }
 
 .cards-mobile {
-  padding: 10px;
-  display: "flex";
+  padding: 10px 0 10px 0;
   justify-content: center;
 }
 
 .home-mobile {
   display: grid;
-  /* flex-wrap: wrap; */
   justify-content: center;
   grid-template-columns: 1fr 1fr;
-  /* justify-content: space-evenly; */
   margin: 4px;
   padding: 10px;
 }

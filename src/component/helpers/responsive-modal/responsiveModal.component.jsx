@@ -44,7 +44,6 @@ const ResponsiveModal = ({
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  console.log(types);
   return (
     <div className="responsive-modal_root">
       <Modal
@@ -52,13 +51,19 @@ const ResponsiveModal = ({
         open={openResponsive}
         onClose={handleCloseResponsive}
         aria-labelledby="keep-mounted-modal-title"
+        sx={{ borderRadius: "10px" }}
       >
         <div className="responsive-modal">
           <h3 style={{ alignSelf: "flex-start" }}>Filters</h3>
           <Accordion
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
-            sx={{ padding: "5px", margin: "5px", border: "1px solid black" }}
+            sx={{
+              padding: "5px",
+              margin: "5px",
+              border: "1px solid black",
+              borderRadius: "10px",
+            }}
           >
             <AccordionSummary
               expandIcon={<AddCircleOutlineIcon />}
@@ -96,7 +101,12 @@ const ResponsiveModal = ({
           <Accordion
             expanded={expanded === "panel2"}
             onChange={handleChange("panel2")}
-            sx={{ padding: "5px", margin: "5px", border: "1px solid black" }}
+            sx={{
+              padding: "5px",
+              margin: "5px",
+              border: "1px solid black",
+              borderRadius: "10px",
+            }}
           >
             <AccordionSummary
               expandIcon={<AddCircleOutlineIcon />}
@@ -125,7 +135,12 @@ const ResponsiveModal = ({
           <Accordion
             expanded={expanded === "panel3"}
             onChange={handleChange("panel3")}
-            sx={{ padding: "5px", margin: "5px", border: "1px solid black" }}
+            sx={{
+              padding: "5px",
+              margin: "5px",
+              border: "1px solid black",
+              borderRadius: "10px",
+            }}
           >
             <AccordionSummary
               expandIcon={<AddCircleOutlineIcon />}
