@@ -88,12 +88,13 @@
 
 .filters-button-mobile {
   text-align: start;
-  color: #2e3156;
+  color: white;
   font-weight: bold;
   padding: 18px;
   margin: 18px;
   flex: 50px;
-  border: none;
+  border: 1px solid #2e3156;
+  background-color: #2e3156;
   border-radius: 10px;
 }
 

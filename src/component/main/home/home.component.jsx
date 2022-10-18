@@ -58,7 +58,6 @@ const Home = () => {
       window.removeEventListener("resize", changeWidth);
     };
   }, []);
-  console.log(windowSize);
   const serachPokemon = (e) => {
     setSearchField(e.target.value);
     const filteredPokemons = pokemons.filter((pokemon) => {

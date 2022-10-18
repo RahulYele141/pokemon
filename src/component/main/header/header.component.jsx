@@ -1,4 +1,3 @@
-import { width } from "@mui/system";
 import React from "react";
 import "./header.style.css";
 
@@ -29,7 +28,7 @@ const Header = ({ windowSize }) => {
           <div className="vertical"></div>
         )}
         <h3 className="tagline">
-          Search for any Pokémon that exists on the planet{" "}
+          Search for any Pokémon that exists on the planet
         </h3>
       </div>
     </div>

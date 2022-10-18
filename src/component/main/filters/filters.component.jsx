@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dropdown from "../../helpers/dropdown/dropdown.component";
 import StatsModal from "../../helpers/slider/slider.component";
 import "./filters.style.css";
-import MenuIcon from "@mui/icons-material/Menu";
+import TuneIcon from "@mui/icons-material/Tune";
 import ResponsiveModal from "../../helpers/responsive-modal/responsiveModal.component";
 
 const Filters = ({
@@ -29,7 +29,6 @@ const Filters = ({
   return (
     <div>
       <div className="filters">
-        {/* search */}
         <input
           type="search"
           onChange={(e) => searchPokemon(e)}
@@ -37,7 +36,6 @@ const Filters = ({
           placeholder="Name or Number"
         ></input>
 
-        {/* types */}
         <button
           name="Normal"
           value="Types"
@@ -57,13 +55,12 @@ const Filters = ({
           handleClose={handleClose}
         />
 
-        {/* gender */}
         <select className={windowSize > 600 ? "gender" : "gender-mobile"}>
           <option value="">Male</option>
           <option value="">Female</option>
           <option value="">Genderless</option>
         </select>
-        {/* stats */}
+
         <button
           name="Normal"
           value="Stats"
@@ -85,14 +82,14 @@ const Filters = ({
           filterByStats={filterByStats}
           resetStats={resetStats}
         />
-        {/* toggle button */}
+
         <div
           className={
             windowSize > 600 ? "filters-button" : "filters-button-mobile"
           }
           onClick={() => openResponsiveModal()}
         >
-          <MenuIcon></MenuIcon>
+          <TuneIcon></TuneIcon>
         </div>
         <div
           style={{

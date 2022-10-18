@@ -6,28 +6,27 @@ const Card = ({ img, pokemon, index, color, openModal, windowSize }) => {
   return (
     <div
       onClick={(e) => openModal(e, index)}
-      className="card"
+      className={windowSize > 600 ? "card" : "card-mobile"}
       style={{
         backgroundImage: `${color}`,
-        width: windowSize < 600 ? "120px" : "180px",
-        height: windowSize < 600 ? "180px" : "270px",
       }}
     >
-      {/* height: ; width: 120px; */}
       <div
-        className="cardImage"
-        style={{
-          width: windowSize < 600 ? "100px" : "120px",
-          height: windowSize < 600 ? "180px" : "240px",
-        }}
+        className={windowSize > 600 ? "cardImage" : "cardImage-mobile"}
+        style={{}}
       >
-        <img src={`${img}`} alt={"pokemon"} className="image" />
+        <img
+          src={`${img}`}
+          alt={"pokemon"}
+          className={windowSize > 600 ? "image" : "image-mobile"}
+        />
       </div>
-      <div className="cardItems">
+      <div className={windowSize > 600 ? "cardItems" : "cardItems-mobile"}>
         <h3
           style={{
             fontWeight: "bold",
-            fontSize: windowSize < 600 ? "12px" : "18px",
+            fontSize: windowSize > 600 ? "18px" : "15px",
+            // display: windowSize > 600 ? "block" : "none",
           }}
         >
           {pokemon?.toUpperCase()}
@@ -35,7 +34,8 @@ const Card = ({ img, pokemon, index, color, openModal, windowSize }) => {
         <p
           style={{
             fontWeight: "500",
-            fontSize: windowSize < 600 ? "8px" : "18px",
+            fontSize: windowSize > 600 ? "18px" : "12px",
+            //   display: windowSize > 600 ? "block" : "none",
           }}
         >
           {("00" + index).slice(-3)}

@@ -17,6 +17,8 @@ const InfoModal = ({
   evolColor,
   windowSize,
 }) => {
+  console.log(windowSize);
+
   const progressBar = (name, value) => {
     return (
       <div
@@ -63,35 +65,76 @@ const InfoModal = ({
       onClose={handleClose}
       aria-labelledby="keep-mounted-modal-title"
     >
-      <Box className="info-modal">
-        <div className="info-modal_root">
-          <div className="info-modal_image_header">
-            <div className="info-image_card">
+      <Box className={windowSize > 600 ? "info-modal" : "info-modal-mobile"}>
+        <div
+          className={
+            windowSize > 600 ? "info-modal_root" : "info-modal_root-mobile"
+          }
+        >
+          <div
+            className={
+              windowSize > 600
+                ? "info-modal_image_header"
+                : "info-modal_image_header-mobile"
+            }
+          >
+            <div
+              style={
+                windowSize > 600 ? { display: "flex" } : { display: "none" }
+              }
+              className={
+                windowSize > 600 ? "info-image_card" : "info-image_card-mobile"
+              }
+            >
               <img
                 src={`${infoModalPokemon?.sprites.other.dream_world.front_default}`}
                 alt={"pokemon"}
-                className="image"
+                className={windowSize > 600 ? "image" : "image-mobile"}
               />
             </div>
-            <div className="info-modal_para_header">
-              <div className="info-modal_header">
+            <div
+              className={
+                windowSize > 600
+                  ? "info-modal_para_header"
+                  : "info-modal_para_header-mobile"
+              }
+            >
+              <div
+                className={
+                  windowSize > 600
+                    ? "info-modal_header"
+                    : "info-modal_header-mobile"
+                }
+              >
                 <div>
                   <h2>{`${infoModalPokemon?.name}`.toUpperCase()}</h2>
                 </div>
-                <div className="vertical-line"></div>
+                <div
+                  className={
+                    windowSize > 600 ? "vertical-line" : "vertical-line-mobile"
+                  }
+                ></div>
                 <div>
                   <h2>{("00" + infoModalPokemon?.id).slice(-3)}</h2>
                 </div>
-                <div className="vertical-line"></div>
                 <div
-                  className="info-modal_header_buttons"
+                  className={
+                    windowSize > 600 ? "vertical-line" : "vertical-line-mobile"
+                  }
+                ></div>
+                <div
+                  className={
+                    windowSize > 600
+                      ? "info-modal_header_buttons"
+                      : "info-modal_header_buttons-mobile"
+                  }
                   style={{ width: "80px" }}
                 >
                   <ArrowCircleLeftOutlinedIcon
                     onClick={(e) => prevPokemon(e)}
                     style={{
                       cursor: "pointer",
-                      display: "flex",
+                      display: windowSize > 600 ? "flex" : "none",
                       padding: "2px",
                       margin: "4px",
                     }}
@@ -110,109 +153,233 @@ const InfoModal = ({
                     onClick={(e) => nextPokemon(e)}
                     style={{
                       cursor: "pointer",
-                      display: "flex",
+                      display: windowSize > 600 ? "flex" : "none",
                       padding: "2px",
                       margin: "4px",
                     }}
                   />
                 </div>
               </div>
-              <div className="info-modal_para">
-                <p style={{ margin: "0", display: "inline" }}>
-                  {description[infoModalPokemon?.id - 1]
-                    ?.slice(0, 4)
-                    .join("")
-                    .replace(/[^a-zA-Z ]/g, "")}
-                </p>
-                <p
-                  style={{
-                    margin: "0",
-                    display: "inline",
-                  }}
+
+              <div style={windowSize > 600 ? {} : { display: "flex" }}>
+                <div
+                  style={
+                    windowSize < 600 ? { display: "flex" } : { display: "none" }
+                  }
+                  className={
+                    windowSize > 600
+                      ? "info-image_card"
+                      : "info-image_card-mobile"
+                  }
                 >
-                  <u>
-                    <DescPopover
-                      description={description[infoModalPokemon?.id - 1]
-                        ?.slice(0, 10)
-                        .join("")
-                        .replace(/[^a-zA-Z ]/g, " ")}
-                    ></DescPopover>
-                  </u>
-                </p>
+                  <img
+                    src={`${infoModalPokemon?.sprites.other.dream_world.front_default}`}
+                    alt={"pokemon"}
+                    className={windowSize > 600 ? "image" : "image-mobile"}
+                  />
+                </div>
+
+                <div
+                  className={
+                    windowSize > 600
+                      ? "info-modal_para"
+                      : "info-modal_para-mobile"
+                  }
+                >
+                  <p style={{ margin: "0", display: "inline" }}>
+                    {windowSize > 600
+                      ? description[infoModalPokemon?.id - 1]
+                          ?.slice(0, 4)
+                          .join("")
+                          .replace(/[^a-zA-Z ]/g, "")
+                      : description[infoModalPokemon?.id - 1]
+                          ?.slice(0, 1)
+                          .join("")
+                          .replace(/[^a-zA-Z ]/g, "")}
+                  </p>
+                  <p
+                    style={{
+                      margin: "0",
+                      display: "inline",
+                    }}
+                  >
+                    <u>
+                      <DescPopover
+                        description={description[infoModalPokemon?.id - 1]
+                          ?.slice(0, 10)
+                          .join("")
+                          .replace(/[^a-zA-Z ]/g, " ")}
+                      ></DescPopover>
+                    </u>
+                  </p>
+                </div>
               </div>
-              <div className="read-more_modal"></div>
+
+              <div
+                className={
+                  windowSize > 600
+                    ? "read-more_modal"
+                    : "read-more_modal-mobile"
+                }
+              ></div>
             </div>
           </div>
-          <div className="info-modal_details">
-            <div className="info-modal_details_row1">
-              <div className="info-modal_details_content">
+          <div
+            className={
+              windowSize > 600
+                ? "info-modal_details"
+                : "info-modal_details-mobile"
+            }
+          >
+            <div
+              className={
+                windowSize > 600
+                  ? "info-modal_details_row1"
+                  : "info-modal_details_row1-mobile"
+              }
+            >
+              <div
+                className={
+                  windowSize > 600
+                    ? "info-modal_details_content"
+                    : "info-modal_details_content-mobile"
+                }
+              >
                 <h4>Height</h4>
                 <p>{infoModalPokemon?.height}'</p>
               </div>
-              <div className="info-modal_details_content">
+              <div
+                className={
+                  windowSize > 600
+                    ? "info-modal_details_content"
+                    : "info-modal_details_content-mobile"
+                }
+              >
                 <h4>Weight</h4> <p>{infoModalPokemon?.weight} Kg</p>
               </div>
-              <div className="info-modal_details_content">
+              <div
+                className={
+                  windowSize > 600
+                    ? "info-modal_details_content"
+                    : "info-modal_details_content-mobile"
+                }
+              >
                 <h4>Gender(s)</h4> <p>{}</p>
               </div>
-              <div className="info-modal_details_content">
+              <div
+                className={
+                  windowSize > 600
+                    ? "info-modal_details_content"
+                    : "info-modal_details_content-mobile"
+                }
+              >
                 <h4>Egg Groups</h4> <p>{}</p>
               </div>
             </div>
-            <div className="info-modal_details_row2">
-              <div className="info-modal_details_content">
+            <div
+              className={
+                windowSize > 600
+                  ? "info-modal_details_row2"
+                  : "info-modal_details_row2-mobile"
+              }
+            >
+              <div
+                className={
+                  windowSize > 600
+                    ? "info-modal_details_content"
+                    : "info-modal_details_content-mobile"
+                }
+              >
                 <h4>Abilities</h4>{" "}
                 <p>
                   {infoModalPokemon?.abilities[0]?.ability.name},{" "}
                   {infoModalPokemon?.abilities[1]?.ability.name}
                 </p>
               </div>
-              <div className="info-modal_details_content">
+              <div
+                className={
+                  windowSize > 600
+                    ? "info-modal_details_content"
+                    : "info-modal_details_content-mobile"
+                }
+              >
                 <h4>Types</h4>
                 <p>
                   {infoModalPokemon?.types[0]?.type.name},{" "}
                   {infoModalPokemon?.types[1]?.type.name}
                 </p>
               </div>
-              <div className="info-modal_details_content">
+              <div
+                className={
+                  windowSize > 600
+                    ? "info-modal_details_content"
+                    : "info-modal_details_content-mobile"
+                }
+              >
                 <h4>Weak against</h4> <p></p>
               </div>
             </div>
           </div>
-          <div className="stats-row">
+          <div className={windowSize > 600 ? "stats-row" : "stats-row-mobile"}>
             <h3>Stats</h3>
-            <div className="stats-list">
-              <div className="stats-progress">
+            <div
+              className={windowSize > 600 ? "stats-list" : "stats-list-mobile"}
+            >
+              <div
+                className={
+                  windowSize > 600 ? "stats-progress" : "stats-progress-mobile"
+                }
+              >
                 {progressBar(
                   infoModalPokemon?.stats[0].stat.name,
                   infoModalPokemon?.stats[0].base_stat
                 )}
               </div>
-              <div className="stats-progress">
+              <div
+                className={
+                  windowSize > 600 ? "stats-progress" : "stats-progress-mobile"
+                }
+              >
                 {progressBar(
                   infoModalPokemon?.stats[2].stat.name,
                   infoModalPokemon?.stats[2].base_stat
                 )}
               </div>
-              <div className="stats-progress">
+              <div
+                className={
+                  windowSize > 600 ? "stats-progress" : "stats-progress-mobile"
+                }
+              >
                 {progressBar(
                   infoModalPokemon?.stats[4].stat.name,
                   infoModalPokemon?.stats[4].base_stat
                 )}
               </div>
-              <div className="stats-progress">
+              <div
+                className={
+                  windowSize > 600 ? "stats-progress" : "stats-progress-mobile"
+                }
+              >
                 {progressBar(
                   infoModalPokemon?.stats[1].stat.name,
                   infoModalPokemon?.stats[1].base_stat
                 )}
               </div>
-              <div className="stats-progress">
+              <div
+                className={
+                  windowSize > 600 ? "stats-progress" : "stats-progress-mobile"
+                }
+              >
                 {progressBar(
                   infoModalPokemon?.stats[3].stat.name,
                   infoModalPokemon?.stats[3].base_stat
                 )}
               </div>
-              <div className="stats-progress">
+              <div
+                className={
+                  windowSize > 600 ? "stats-progress" : "stats-progress-mobile"
+                }
+              >
                 {progressBar(
                   infoModalPokemon?.stats[5].stat.name,
                   infoModalPokemon?.stats[5].base_stat
@@ -220,46 +387,119 @@ const InfoModal = ({
               </div>
             </div>
           </div>
-          <div className="evolution-main">
-            <div className="evolution-heading">
+          <div
+            className={
+              windowSize > 600 ? "evolution-main" : "evolution-main-mobile"
+            }
+          >
+            <div
+              className={
+                windowSize > 600
+                  ? "evolution-heading"
+                  : "evolution-heading-mobile"
+              }
+            >
               <h3>Evolution Chain</h3>
             </div>
-            <div className="evolution-chain">
-              {evolPokemons[0] ? (
-                <Card
-                  img={`${evolPokemons[0]?.sprites.other.dream_world.front_default}`}
-                  pokemon={evolPokemons[0]?.name}
-                  index={evolPokemons[0]?.id}
-                  color={evolColor?.[0]}
-                />
+            <div
+              className={
+                windowSize > 600 ? "evolution-chain" : "evolution-chain-mobile"
+              }
+            >
+              {windowSize > 600 ? (
+                evolPokemons[0] ? (
+                  <Card
+                    img={`${evolPokemons[0]?.sprites.other.dream_world.front_default}`}
+                    pokemon={evolPokemons[0]?.name}
+                    index={evolPokemons[0]?.id}
+                    color={evolColor?.[0]}
+                  />
+                ) : (
+                  ""
+                )
               ) : (
-                ""
+                <div
+                  className="evolution-chain_card-mobile"
+                  style={{ backgroundImage: `${evolColor?.[0]}` }}
+                >
+                  <img
+                    src={`${evolPokemons[0]?.sprites.other.dream_world.front_default}`}
+                    alt={"pokemon"}
+                    className="evolution-chain-image-mobile"
+                  />
+                </div>
               )}
               {evolPokemons[0] ? (
-                <h2 className="evolution-chain_arrow">&#8594;</h2>
+                <h2
+                  className={
+                    windowSize > 600
+                      ? "evolution-chain_arrow"
+                      : "evolution-chain_arrow-mobile"
+                  }
+                >
+                  &#8594;
+                </h2>
               ) : (
                 ""
               )}
-              <Card
-                img={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
-                pokemon={evolPokemons[1]?.name}
-                index={evolPokemons[1]?.id}
-                color={evolColor?.[1]}
-              />
+              {windowSize > 600 ? (
+                evolPokemons[1] ? (
+                  <Card
+                    img={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
+                    pokemon={evolPokemons[1]?.name}
+                    index={evolPokemons[1]?.id}
+                    color={evolColor?.[1]}
+                  />
+                ) : (
+                  ""
+                )
+              ) : (
+                <div
+                  className="evolution-chain_card-mobile"
+                  style={{ backgroundImage: `${evolColor?.[1]}` }}
+                >
+                  <img
+                    src={`${evolPokemons[1]?.sprites.other.dream_world.front_default}`}
+                    alt={"pokemon"}
+                    className="evolution-chain-image-mobile"
+                  />
+                </div>
+              )}
               {evolPokemons[2] ? (
-                <h2 className="evolution-chain_arrow">&#8594;</h2>
+                <h2
+                  className={
+                    windowSize > 600
+                      ? "evolution-chain_arrow"
+                      : "evolution-chain_arrow-mobile"
+                  }
+                >
+                  &#8594;
+                </h2>
               ) : (
                 ""
               )}
-              {evolPokemons[2] ? (
-                <Card
-                  img={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
-                  pokemon={evolPokemons[2]?.name}
-                  index={evolPokemons[2]?.id}
-                  color={evolColor?.[2]}
-                />
+              {windowSize > 600 ? (
+                evolPokemons[2] ? (
+                  <Card
+                    img={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
+                    pokemon={evolPokemons[2]?.name}
+                    index={evolPokemons[2]?.id}
+                    color={evolColor?.[2]}
+                  />
+                ) : (
+                  ""
+                )
               ) : (
-                ""
+                <div
+                  className="evolution-chain_card-mobile"
+                  style={{ backgroundImage: `${evolColor?.[2]}` }}
+                >
+                  <img
+                    src={`${evolPokemons[2]?.sprites.other.dream_world.front_default}`}
+                    alt={"pokemon"}
+                    className="evolution-chain-image-mobile"
+                  />
+                </div>
               )}
             </div>
           </div>
