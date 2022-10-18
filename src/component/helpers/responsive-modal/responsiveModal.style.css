@@ -8,7 +8,7 @@
 .responsive-modal {
   display: flex;
   background-color: white;
-  width: 250px;
+  width: 75%;
   min-height: 600px;
   height: 90%;
   color: #2e3156;
