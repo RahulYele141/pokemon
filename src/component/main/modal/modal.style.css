@@ -180,7 +180,7 @@ label {
 .info-modal_root-mobile {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 90%;
   height: 100%;
   overflow: auto;
   -ms-overflow-style: none;
@@ -194,7 +194,7 @@ label {
 .info-modal-mobile {
   display: flex;
   position: relative;
-  width: 300px;
+  width: 90%;
   height: 90%;
   overflow: hidden;
   background-color: #deeded;

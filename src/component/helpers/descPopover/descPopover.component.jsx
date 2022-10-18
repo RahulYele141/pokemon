@@ -3,7 +3,8 @@ import Popover from "@mui/material/Popover";
 
 import "./descPopover.style.css";
 
-export default function DescPopover({ description }) {
+export default function DescPopover({ description, windowSize }) {
+  console.log(windowSize);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -39,7 +40,11 @@ export default function DescPopover({ description }) {
           horizontal: "left",
         }}
       >
-        <div className="popover-modal">
+        <div
+          className={
+            windowSize > 600 ? "popover-modal" : "popover-modal-mobile"
+          }
+        >
           <p sx={{ p: 1, maxWidth: "400px" }}>{description}</p>
         </div>
       </Popover>

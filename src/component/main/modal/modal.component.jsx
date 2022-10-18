@@ -17,8 +17,6 @@ const InfoModal = ({
   evolColor,
   windowSize,
 }) => {
-  console.log(windowSize);
-
   const progressBar = (name, value) => {
     return (
       <div
@@ -205,6 +203,7 @@ const InfoModal = ({
                   >
                     <u>
                       <DescPopover
+                        windowSize={windowSize}
                         description={description[infoModalPokemon?.id - 1]
                           ?.slice(0, 10)
                           .join("")
