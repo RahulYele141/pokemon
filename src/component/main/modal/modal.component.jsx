@@ -16,6 +16,7 @@ const InfoModal = ({
   evolPokemons,
   evolColor,
   windowSize,
+  color,
 }) => {
   const progressBar = (name, value) => {
     return (
@@ -56,6 +57,13 @@ const InfoModal = ({
     );
   };
 
+  const colorModal = () => {
+    if (infoModalPokemon === undefined) return;
+    else return color(infoModalPokemon);
+  };
+
+  colorModal(infoModalPokemon);
+
   return (
     <Modal
       keepMounted
@@ -78,11 +86,14 @@ const InfoModal = ({
           >
             <div
               style={
-                windowSize > 600 ? { display: "flex" } : { display: "none" }
+                windowSize > 600
+                  ? {
+                      display: "flex",
+                      backgroundImage: `${colorModal(infoModalPokemon)}`,
+                    }
+                  : { display: "none" }
               }
-              className={
-                windowSize > 600 ? "info-image_card" : "info-image_card-mobile"
-              }
+              className="info-image_card"
             >
               <img
                 src={`${infoModalPokemon?.sprites.other.dream_world.front_default}`}
@@ -162,13 +173,14 @@ const InfoModal = ({
               <div style={windowSize > 600 ? {} : { display: "flex" }}>
                 <div
                   style={
-                    windowSize < 600 ? { display: "flex" } : { display: "none" }
+                    windowSize < 600
+                      ? {
+                          display: "flex",
+                          backgroundImage: `${colorModal(infoModalPokemon)}`,
+                        }
+                      : { display: "none" }
                   }
-                  className={
-                    windowSize > 600
-                      ? "info-image_card"
-                      : "info-image_card-mobile"
-                  }
+                  className="info-image_card-mobile"
                 >
                   <img
                     src={`${infoModalPokemon?.sprites.other.dream_world.front_default}`}
